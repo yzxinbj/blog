@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>zepto中的正则表达式 | the_road_to_rdinary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="/^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ fragmentRE = /^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ 匹配 html 字符串 \s 表示所有空格类型，空格、回车、换行 (\w+|!) 表示 word 或 ! 叹号是指注释 &amp;lt;!--&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;--&amp;gt; [^&amp;gt;] 表示不能是大于号的所有字符  /^[\w-]*$">
+  <meta name="description" content="/^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ fragmentRE = /^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ 匹配 html 字符串，用来测试字符串是否是 html \s 表示所有空格类型，空格、回车、换行 (\w+|!) 表示 word 或 ! 叹号是指注释 &amp;lt;!--&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;--&amp;gt; [^&amp;gt;] 表示不能是大于号">
 <meta name="keywords" content="正则">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zepto中的正则表达式">
 <meta property="og:url" content="http://yoursite.com/2017/09/09/zepto中的正则表达式/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
-<meta property="og:description" content="/^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ fragmentRE = /^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ 匹配 html 字符串 \s 表示所有空格类型，空格、回车、换行 (\w+|!) 表示 word 或 ! 叹号是指注释 &amp;lt;!--&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;--&amp;gt; [^&amp;gt;] 表示不能是大于号的所有字符  /^[\w-]*$">
-<meta property="og:updated_time" content="2017-09-11T08:46:24.000Z">
+<meta property="og:description" content="/^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ fragmentRE = /^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ 匹配 html 字符串，用来测试字符串是否是 html \s 表示所有空格类型，空格、回车、换行 (\w+|!) 表示 word 或 ! 叹号是指注释 &amp;lt;!--&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;--&amp;gt; [^&amp;gt;] 表示不能是大于号">
+<meta property="og:updated_time" content="2017-09-12T08:27:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zepto中的正则表达式">
-<meta name="twitter:description" content="/^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ fragmentRE = /^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ 匹配 html 字符串 \s 表示所有空格类型，空格、回车、换行 (\w+|!) 表示 word 或 ! 叹号是指注释 &amp;lt;!--&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;--&amp;gt; [^&amp;gt;] 表示不能是大于号的所有字符  /^[\w-]*$">
+<meta name="twitter:description" content="/^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ fragmentRE = /^\s&amp;lt;(\w+|!)[^&amp;gt;]&amp;gt;/ 匹配 html 字符串，用来测试字符串是否是 html \s 表示所有空格类型，空格、回车、换行 (\w+|!) 表示 word 或 ! 叹号是指注释 &amp;lt;!--&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;--&amp;gt; [^&amp;gt;] 表示不能是大于号">
   
   
     <link rel="icon" href="/favicon.png">
@@ -170,14 +170,29 @@
       
         <h3 id="s-lt-w-gt-gt"><a href="#s-lt-w-gt-gt" class="headerlink" title="/^\s&lt;(\w+|!)[^&gt;]&gt;/"></a>/^\s<em>&lt;(\w+|!)[^&gt;]</em>&gt;/</h3><ul>
 <li>fragmentRE = /^\s<em>&lt;(\w+|!)[^&gt;]</em>&gt;/</li>
-<li>匹配 <code>html</code> 字符串</li>
+<li>匹配 <code>html</code> 字符串，用来测试字符串是否是 <code>html</code></li>
 <li><code>\s</code> 表示所有空格类型，空格、回车、换行</li>
 <li><code>(\w+|!)</code> 表示 <code>word</code> 或 <code>!</code> 叹号是指注释 <code>&lt;!--&lt;span&gt;&lt;/span&gt;--&gt;</code></li>
 <li><code>[^&gt;]</code> 表示不能是大于号的所有字符</li>
 </ul>
-<h3 id="w"><a href="#w" class="headerlink" title="/^[\w-]*$/,"></a>/^[\w-]*$/,</h3><ul>
+<h3 id="w"><a href="#w" class="headerlink" title="/^[\w-]*$/"></a>/^[\w-]*$/</h3><ul>
 <li>simpleSelectorRE = /^[\w-]*$/</li>
-<li>表示简单正则，匹配可包含 <code>word</code> 的字符串</li>
+<li>表示简单正则，匹配可包含 <code>word</code> 和 <code>-</code> 的字符串</li>
+</ul>
+<a id="more"></a>
+<h3 id="lt-area-br-col-embed-hr-img-input-link-meta-param-w-gt-gt-ig"><a href="#lt-area-br-col-embed-hr-img-input-link-meta-param-w-gt-gt-ig" class="headerlink" title="/&lt;(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^&gt;]*)\/&gt;/ig"></a>/&lt;(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^&gt;]*)\/&gt;/ig</h3><ul>
+<li>tagExpanderRE = </li>
+<li>匹配除了括号里的单标签</li>
+<li><code>html = html.replace(tagExpanderRE, &quot;&lt;$1&gt;&lt;/$2&gt;&quot;)</code> <code>zepto</code> 里的表示单标签换成双标签</li>
+<li><code>&lt;(?!area|br|col|embed|hr|img|input|link|meta|param)</code> 正向否定预查，即表示匹配不能是括号里的词的 <code>&lt;</code></li>
+<li><code>([\w:]+)</code> 匹配捕获是什么标签</li>
+<li><code>[^&gt;]*</code> 表示除了 <code>&gt;</code> 的任意字符，目的是防止标签闭合</li>
+</ul>
+<h3 id="body-html-i"><a href="#body-html-i" class="headerlink" title="/^(?:body|html)$/i"></a>/^(?:body|html)$/i</h3><ul>
+<li>rootNodeRE = /^(?:body|html)$/i</li>
+<li>匹配 <code>body</code> 或 <code>html</code> 不区分大小写，<code>?:</code>表示匹配不捕获，即 <code>RegExp.$1</code> 是拿不到的</li>
+<li>注意有 <code>^</code> 和 <code>$</code> 表示开头结尾不能是别的</li>
+<li>匹配不捕获 <code>/friend(?:s|ly)*/</code> 这种只能匹配到 <code>friend</code> 或 <code>friends</code> 或 <code>friendly</code> ，匹配不到 <code>friendsdfd</code> 里的friend</li>
 </ul>
 
       

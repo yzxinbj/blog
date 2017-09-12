@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>hexo的使用 | the_road_to_rdinary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写作 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  遇到的问题deploy 到git 上样式，js 40412345配置要正确deploy:  type: git  repo: git@github.com:yzxinbj/blog.gitroot: /blog  # 默认是斜杠根目录，git 要配置为你的仓">
+  <meta name="description" content="写作 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  hexo-generator-json-content 插件实现站内搜索1需要在 _config.yml 里配置 jsonContent 设置分类和标签123456# 在md文件中的头部加上# 例：tags: - 正则categories: - 编程 1在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo的使用">
 <meta property="og:url" content="http://yoursite.com/2017/09/09/hexo的使用/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
-<meta property="og:description" content="写作 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  遇到的问题deploy 到git 上样式，js 40412345配置要正确deploy:  type: git  repo: git@github.com:yzxinbj/blog.gitroot: /blog  # 默认是斜杠根目录，git 要配置为你的仓">
-<meta property="og:updated_time" content="2017-09-11T08:46:24.000Z">
+<meta property="og:description" content="写作 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  hexo-generator-json-content 插件实现站内搜索1需要在 _config.yml 里配置 jsonContent 设置分类和标签123456# 在md文件中的头部加上# 例：tags: - 正则categories: - 编程 1在">
+<meta property="og:updated_time" content="2017-09-12T08:31:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo的使用">
-<meta name="twitter:description" content="写作 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  遇到的问题deploy 到git 上样式，js 40412345配置要正确deploy:  type: git  repo: git@github.com:yzxinbj/blog.gitroot: /blog  # 默认是斜杠根目录，git 要配置为你的仓">
+<meta name="twitter:description" content="写作 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  hexo-generator-json-content 插件实现站内搜索1需要在 _config.yml 里配置 jsonContent 设置分类和标签123456# 在md文件中的头部加上# 例：tags: - 正则categories: - 编程 1在">
   
   
     <link rel="icon" href="/favicon.png">
@@ -172,7 +172,14 @@
 <li><code>hexo generate</code> 可以追加<code>-w</code>参数实时变动</li>
 <li><code>hexo deploy</code> 发布</li>
 </ul>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p><code>deploy</code> 到<code>git</code> 上样式，js 404<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">配置要正确</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:yzxinbj/blog.git</div><div class="line">root: /blog  # 默认是斜杠根目录，git 要配置为你的仓库路径</div></pre></td></tr></table></figure></p>
+<h3 id="hexo-generator-json-content-插件实现站内搜索"><a href="#hexo-generator-json-content-插件实现站内搜索" class="headerlink" title="hexo-generator-json-content 插件实现站内搜索"></a>hexo-generator-json-content 插件实现站内搜索</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">需要在 _config.yml 里配置 jsonContent</div></pre></td></tr></table></figure>
+<h2 id="设置分类和标签"><a href="#设置分类和标签" class="headerlink" title="设置分类和标签"></a>设置分类和标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 在md文件中的头部加上</div><div class="line"># 例：</div><div class="line">tags: </div><div class="line">- 正则</div><div class="line">categories: </div><div class="line">- 编程</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在 scaffolds/post.md 的头部中加上categories:  方便下次 new 写作</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># 设置中英映射</div><div class="line"># Category &amp; Tag</div><div class="line">default_category: uncategorized</div><div class="line">category_map:</div><div class="line">  编程: programming</div><div class="line">  生活: life</div><div class="line">  其他: other </div><div class="line">tag_map:</div><div class="line">  正则: regexp</div></pre></td></tr></table></figure>
+<h3 id="长文章截断"><a href="#长文章截断" class="headerlink" title="长文章截断"></a>长文章截断</h3><p>在文章中加入<code>&lt;!-- more --&gt;</code></p>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
+<li><code>deploy</code> 到<code>git</code> 上样式，js 404<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 配置要正确</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:yzxinbj/blog.git</div><div class="line">root: /blog  # 默认是斜杠根目录，git 要配置为你的仓库路径</div></pre></td></tr></table></figure></li>
+</ol>
 
       
 
