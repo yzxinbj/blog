@@ -84,6 +84,7 @@ deploy:
   type: git
   repo: git@github.com:yzxinbj/blog.git
   
+# 自定义站内搜索
 jsonContent:
   meta: false
   pages: false
