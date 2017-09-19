@@ -60,6 +60,8 @@ category_map:
   其他: other 
 tag_map:
   正则: regexp
+  高德地图: Amap
+  SQL: SQL
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
