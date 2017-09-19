@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>hexo的使用 | the_road_to_rdinary</title>
+  <title>项目中用到的高德德图 API | the_road_to_rdinary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写作执行以下命令即可 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  hexo-generator-json-content 插件实现站内搜索1需要在 _config.yml 里配置 jsonContent 设置分类和标签在md文件中的头部加上例：1234tags: - 正则categories: - 编程 1">
+  <meta name="description" content="AMap高德地图常用API使用记录 Marker地图排线中使用到的API123456789101112131415var config = &amp;#123;    zIndex: 100, //默认100，地图排线中需要让业务人员一眼看清红色的未排线点，所以设置红色的为101    map: map, // 在那个地图上设置marker    position: [], // 坐标    data:">
+<meta name="keywords" content="高德地图">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo的使用">
-<meta property="og:url" content="http://yoursite.com/2017/09/09/hexo的使用/index.html">
+<meta property="og:title" content="项目中用到的高德德图 API">
+<meta property="og:url" content="http://yoursite.com/2017/09/19/项目中用到的高德德图-API/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
-<meta property="og:description" content="写作执行以下命令即可 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  hexo-generator-json-content 插件实现站内搜索1需要在 _config.yml 里配置 jsonContent 设置分类和标签在md文件中的头部加上例：1234tags: - 正则categories: - 编程 1">
-<meta property="og:updated_time" content="2017-09-19T09:37:32.000Z">
+<meta property="og:description" content="AMap高德地图常用API使用记录 Marker地图排线中使用到的API123456789101112131415var config = &amp;#123;    zIndex: 100, //默认100，地图排线中需要让业务人员一眼看清红色的未排线点，所以设置红色的为101    map: map, // 在那个地图上设置marker    position: [], // 坐标    data:">
+<meta property="og:updated_time" content="2017-09-19T09:45:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo的使用">
-<meta name="twitter:description" content="写作执行以下命令即可 hexo new &amp;quot;文件名&amp;quot; hexo generate 可以追加-w参数实时变动 hexo deploy 发布  hexo-generator-json-content 插件实现站内搜索1需要在 _config.yml 里配置 jsonContent 设置分类和标签在md文件中的头部加上例：1234tags: - 正则categories: - 编程 1">
+<meta name="twitter:title" content="项目中用到的高德德图 API">
+<meta name="twitter:description" content="AMap高德地图常用API使用记录 Marker地图排线中使用到的API123456789101112131415var config = &amp;#123;    zIndex: 100, //默认100，地图排线中需要让业务人员一眼看清红色的未排线点，所以设置红色的为101    map: map, // 在那个地图上设置marker    position: [], // 坐标    data:">
   
   
     <link rel="icon" href="/favicon.png">
@@ -147,38 +148,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hexo的使用" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-项目中用到的高德德图-API" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      hexo的使用
+      项目中用到的高德德图 API
     </h1>
   
 
         
-        <a href="/blog/2017/09/09/hexo的使用/" class="archive-article-date">
-  	<time datetime="2017-09-09T07:57:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
+        <a href="/blog/2017/09/19/项目中用到的高德德图-API/" class="archive-article-date">
+  	<time datetime="2017-09-19T09:27:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h2><h4 id="执行以下命令即可"><a href="#执行以下命令即可" class="headerlink" title="执行以下命令即可"></a>执行以下命令即可</h4><ul>
-<li><code>hexo new &quot;文件名&quot;</code></li>
-<li><code>hexo generate</code> 可以追加<code>-w</code>参数实时变动</li>
-<li><code>hexo deploy</code> 发布</li>
-</ul>
-<h4 id="hexo-generator-json-content-插件实现站内搜索"><a href="#hexo-generator-json-content-插件实现站内搜索" class="headerlink" title="hexo-generator-json-content 插件实现站内搜索"></a>hexo-generator-json-content 插件实现站内搜索</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">需要在 _config.yml 里配置 jsonContent</div></pre></td></tr></table></figure>
-<h2 id="设置分类和标签"><a href="#设置分类和标签" class="headerlink" title="设置分类和标签"></a>设置分类和标签</h2><h5 id="在md文件中的头部加上"><a href="#在md文件中的头部加上" class="headerlink" title="在md文件中的头部加上"></a>在md文件中的头部加上</h5><p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tags: </div><div class="line">- 正则</div><div class="line">categories: </div><div class="line">- 编程</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在 scaffolds/post.md 的头部中加上categories:  方便下次 new 写作</div></pre></td></tr></table></figure>
-<h4 id="设置中英映射"><a href="#设置中英映射" class="headerlink" title="设置中英映射"></a>设置中英映射</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># Category &amp; Tag</div><div class="line">default_category: uncategorized</div><div class="line">category_map:</div><div class="line">  编程: programming</div><div class="line">  生活: life</div><div class="line">  其他: other </div><div class="line">tag_map:</div><div class="line">  正则: regexp</div></pre></td></tr></table></figure>
-<h2 id="长文章截断"><a href="#长文章截断" class="headerlink" title="长文章截断"></a>长文章截断</h2><p>在文章中加入<code>&lt;!-- more --&gt;</code></p>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p><code>deploy</code> 到<code>git</code>，但<code>css</code>，<code>js</code> 404<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 配置要正确</div><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:yzxinbj/blog.git</div><div class="line">root: /blog  # 默认是斜杠根目录，git 要配置为你的仓库路径</div></pre></td></tr></table></figure></p>
-
+        <h2 id="AMap"><a href="#AMap" class="headerlink" title="AMap"></a>AMap</h2><p>高德地图常用API使用记录</p>
+<h3 id="Marker"><a href="#Marker" class="headerlink" title="Marker"></a>Marker</h3><h4 id="地图排线中使用到的API"><a href="#地图排线中使用到的API" class="headerlink" title="地图排线中使用到的API"></a>地图排线中使用到的API</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> config = &#123;</div><div class="line">    zIndex: <span class="number">100</span>, <span class="comment">//默认100，地图排线中需要让业务人员一眼看清红色的未排线点，所以设置红色的为101</span></div><div class="line">    map: map, <span class="comment">// 在那个地图上设置marker</span></div><div class="line">    position: [], <span class="comment">// 坐标</span></div><div class="line">    data: data <span class="comment">// 自定义属性</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> marker = <span class="keyword">new</span> AMap.Marker(&#123; <span class="comment">//添加自定义点标记</span></div><div class="line">    zIndex: config.zIndex,</div><div class="line">    map: config.map,</div><div class="line">    position: config.position, <span class="comment">//基点位置</span></div><div class="line">    offset: <span class="keyword">new</span> AMap.Pixel(<span class="number">0</span>, <span class="number">0</span>), <span class="comment">//相对于基点的偏移位置,默认0</span></div><div class="line">    draggable: <span class="literal">false</span>,  <span class="comment">//是否可拖动</span></div><div class="line">    content: <span class="string">'&lt;div class="'</span> + config.markType + <span class="string">'"&gt;&lt;/div&gt;'</span>,   <span class="comment">//自定义点标记覆盖物内容</span></div><div class="line">    extData: config.data <span class="comment">// 自定义数据</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="设置、获取marker上的自定义属性"><a href="#设置、获取marker上的自定义属性" class="headerlink" title="设置、获取marker上的自定义属性"></a>设置、获取marker上的自定义属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">marker.setExtData();</div><div class="line"></div><div class="line"><span class="keyword">var</span> data = marker.getExtData();</div><div class="line"></div><div class="line"><span class="comment">// 如果想单独更改data里的一个无需用setExtData</span></div><div class="line"><span class="comment">// 直接data.is_line = true;即可</span></div></pre></td></tr></table></figure>
+<h4 id="触发marker的点击事件"><a href="#触发marker的点击事件" class="headerlink" title="触发marker的点击事件"></a>触发marker的点击事件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">AMap.event.trigger(marker, <span class="string">'click'</span>);</div></pre></td></tr></table></figure>
+<h4 id="移除marker"><a href="#移除marker" class="headerlink" title="移除marker"></a>移除marker</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">marker.setMap(<span class="literal">null</span>);</div></pre></td></tr></table></figure>
+<h4 id="获取marker位置"><a href="#获取marker位置" class="headerlink" title="获取marker位置"></a>获取marker位置</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">marker.getPosition()</div></pre></td></tr></table></figure>
+<h2 id="地图工具方法API"><a href="#地图工具方法API" class="headerlink" title="地图工具方法API"></a>地图工具方法API</h2><h4 id="地图测距"><a href="#地图测距" class="headerlink" title="地图测距"></a>地图测距</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ruler;</div><div class="line"></div><div class="line">map.plugin([<span class="string">"AMap.RangingTool"</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    ruler = <span class="keyword">new</span> AMap.RangingTool(map);</div><div class="line"></div><div class="line">    AMap.event.addListener(ruler, <span class="string">"end"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">        ruler.turnOff();</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    ruler.turnOn();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="方形框选"><a href="#方形框选" class="headerlink" title="方形框选"></a>方形框选</h4><p>注意使用mouseTool需要在script引用时多传一个参数plugin=AMap.MouseTool<br><code>&lt;script src=&quot;http://webapi.amap.com/maps?v=1.3&amp;key=你的key&amp;plugin=AMap.MouseTool&quot;&gt;&lt;/script&gt;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mouseTool = <span class="keyword">new</span> AMap.MouseTool(map);</div><div class="line">mouseTool.rectangle();<span class="comment">// 打开框选</span></div><div class="line"></div><div class="line">AMap.event.addListener(mouseTool, <span class="string">'draw'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">    e.obj.contains(marker.getPosition()); <span class="comment">//可以判断一个点是否在框选的范围内</span></div><div class="line">    mouseTool.close(<span class="literal">true</span>);<span class="comment">// 框选结束即消失</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="InfoWindow"><a href="#InfoWindow" class="headerlink" title="InfoWindow"></a>InfoWindow</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> infoWindow = <span class="keyword">new</span> AMap.InfoWindow(&#123;<span class="attr">offset</span>: <span class="keyword">new</span> AMap.Pixel(<span class="number">0</span>, <span class="number">0</span>)&#125;);</div><div class="line">infoWindow.setContent(<span class="string">'wo shi html'</span>);</div><div class="line">infoWindow.open(map, marker.getPosition());</div><div class="line"></div><div class="line">map.setFitView();<span class="comment">// 设置地图视图缩放为合适的位置，即视图内展示所有覆盖物</span></div></pre></td></tr></table></figure>
       
 
       
@@ -186,13 +185,24 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">高德地图</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/blog/categories/other//" class="article-tag-list-link color3">其他</a>
+        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
         		</li>
       		
 		</ul>
@@ -247,7 +257,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/09/hexo的使用/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/19/项目中用到的高德德图-API/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -261,18 +271,9 @@
   
 <nav id="article-nav">
   
-    <a href="/blog/2017/09/12/EasyUI-组件思路/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          EasyUI 组件思路
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2017/09/09/zepto中的正则表达式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">zepto中的正则表达式</div>
+    <a href="/blog/2017/09/19/SOL学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SOL学习</div>
       <i class="icon-circle-right"></i>
     </a>
   
