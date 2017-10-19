@@ -16,4 +16,26 @@ $.fn === $.prototype       // true
 $.fn === $().__proto__     // true
 ```
 
+所以可以把$看成
+
+```javascript
+function $(){
+    
+}
+
+$.prototype = $.fn = {
+    
+}
+
+```
+
+所以可以看到一些 jquery 的插件都是这样
+```javascript
+// 扩充 $.fn 
+$.extend($.fn, {
+    
+});
+```
+
+
 

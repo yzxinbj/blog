@@ -1,6 +1,5 @@
 ---
 title: c语言学习
-date: 2017-10-11 11:58:49
 tags: 
 - c 语言
 categories:
