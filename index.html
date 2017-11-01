@@ -145,6 +145,515 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-关于-configurable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/10/31/关于-configurable/">关于-configurable</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2017/10/31/关于-configurable/" class="archive-article-date">
+  	<time datetime="2017-10-31T05:58:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty()"></a>Object.defineProperty()</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, &#123;</div><div class="line">  enumerable: <span class="literal">false</span>, <span class="comment">// 是否可枚举，即能否在 for in 中遍历出来</span></div><div class="line">  configurable: <span class="literal">false</span>, <span class="comment">// 能否修改前3个属性</span></div><div class="line">  writable: <span class="literal">false</span>, <span class="comment">// 能否修改此值，如直接赋值，或用defineProperty更改</span></div><div class="line">  value: <span class="string">'static'</span> <span class="comment">// 值</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 当 configurable 为 false 时</span></div><div class="line"><span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, &#123;</div><div class="line">  enumerable: <span class="literal">false</span>, </div><div class="line">  configurable: <span class="literal">false</span>,</div><div class="line">  writable: <span class="literal">true</span>,</div><div class="line">  value: <span class="string">'static'</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 可以执行</span></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, &#123;</div><div class="line">  value: <span class="number">123</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 可以执行</span></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, &#123;</div><div class="line">  writable: <span class="literal">false</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 报错</span></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, &#123;</div><div class="line">  writable: <span class="literal">true</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 报错, 因为 writable 被设置成了 false </span></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, &#123;</div><div class="line">  value: <span class="number">234</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 报错</span></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, &#123;</div><div class="line">  enumerable: <span class="literal">true</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 错误信息一致</span></div><div class="line"><span class="comment">// Uncaught TypeError: Cannot redefine property: key</span></div><div class="line"><span class="comment">//    at Function.defineProperty (&lt;anonymous&gt;)</span></div><div class="line"><span class="comment">//    at &lt;anonymous&gt;:1:8</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 详细的自己执行下就知道了</span></div></pre></td></tr></table></figure>
+<p>结论: configurable 为 false 时，除了能设置 writable 为 false，其他更改描述符的方式均报错</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2017/10/31/关于-configurable/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux-02-linux用户及文件权限管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/10/30/linux-02-linux用户及文件权限管理/">linux用户及文件权限管理</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2017/10/30/linux-02-linux用户及文件权限管理/" class="archive-article-date">
+  	<time datetime="2017-10-30T08:54:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><p><code>who am i</code>  <code>whoami</code> <code>who mom likes</code></p>
+<p><code>yanzixian pts/0        2017-11-01 09:45 (172.17.62.48)</code><br>第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言的，<br>[Ctrl]+[Alt]+[F1]～[F7] 进行切换的 /dev/tty 设备,这是“真终端”，<br>伪终端就是当你在图形用户界面使用 /dev/tty7 时每打开一个终端就会产生一个伪终端，<br>pts/0 后面那个数字就表示打开的伪终端序号，再打开一个终端，然后在里面输入 who am i ，<br>第二列就变成 pts/1 了，第三列则表示当前伪终端的启动时间</p>
+<p><code>who</code> 命令参数</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-a</td>
+<td>打印能打印的全部</td>
+</tr>
+<tr>
+<td style="text-align:left">-d</td>
+<td>打印死掉的进程</td>
+</tr>
+<tr>
+<td style="text-align:left">-m</td>
+<td>同am i,mom likes</td>
+</tr>
+<tr>
+<td style="text-align:left">-q</td>
+<td>打印当前登录用户数及用户名</td>
+</tr>
+<tr>
+<td style="text-align:left">-u</td>
+<td>打印当前登录用户登录信息</td>
+</tr>
+<tr>
+<td style="text-align:left">-r</td>
+<td>打印运行等级</td>
+</tr>
+</tbody>
+</table>
+<h4 id="su-su-与-sudo"><a href="#su-su-与-sudo" class="headerlink" title="su, su- 与 sudo"></a>su, su- 与 sudo</h4><p><code>su &lt;user&gt;</code>可以切换到用户 user，执行时需要输入目标用户的密码，<br><code>sudo &lt;cmd&gt;</code>可以以特权级别运行 cmd 命令，需要当前用户属于<br>sudo 组，且需要输入当前用户的密码。<code>su - &lt;user&gt;</code><br>命令也是切换用户，同时环境变量也会跟着改变成目标用户的环境变量。</p>
+<h4 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h4><p>新建用户: </p>
+<blockquote>
+<p>adduser yzx  程序，会提示你设置<br>useradd yzx  命令<br>但在 redhat 下实验没有区别</p>
+</blockquote>
+<p>查看用户在哪些用户组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">groups &lt;user&gt;</div><div class="line">cat /etc/group | sort (sort 是按照字典排序再输出)</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>输出格式：group_name:password:GID:user_list</p>
+</blockquote>
+<p>查看哪些有 sudo 权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ll /etc/sudoers.d/</div><div class="line">sudo cat /etc/sudoers.d/shiyanlou</div><div class="line">cat /etc/sudoers</div></pre></td></tr></table></figure></p>
+<p>其中会配置类似如下的内容</p>
+<blockquote>
+<p>root    ALL=(ALL)       ALL<br>www     ALL=(ALL)       NOPASSWD: ALL<br>shiyanlou     ALL=(ALL)       NOPASSWD: ALL<br>Defaults:shiyanlou  !requiretty</p>
+</blockquote>
+<p>加入sudo 用户组</p>
+<blockquote>
+<p>sudo usermod -G sudo yzx</p>
+</blockquote>
+<p>删除用户</p>
+<blockquote>
+<p>sudo userdel yzx -r</p>
+</blockquote>
+<p>ls 下显示的文件类型</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字母</th>
+<th style="text-align:left">表示类型</th>
+<th style="text-align:left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">d</td>
+<td style="text-align:left">目录</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">l</td>
+<td style="text-align:left">软链接</td>
+<td style="text-align:left">可理解为快捷方式</td>
+</tr>
+<tr>
+<td style="text-align:left">b</td>
+<td style="text-align:left">块设备</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">c</td>
+<td style="text-align:left">字符 设配</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">s</td>
+<td style="text-align:left">socket</td>
+<td style="text-align:left">套接字</td>
+</tr>
+<tr>
+<td style="text-align:left">p</td>
+<td style="text-align:left">管道</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">-</td>
+<td style="text-align:left">普通文件</td>
+</tr>
+</tbody>
+</table>
+<p>变更文件所有者</p>
+<blockquote>
+<p>sudo chown <user> <file></file></user></p>
+</blockquote>
+<p>修改文件权限</p>
+<blockquote>
+<p>chmod 700 <file><br>chmod gou-rw <file><br>其中 u、g 还有 o 分别表示 user、group 和 others，+ 和 - 分别表示增加和去掉相应的权限</file></file></p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2017/10/30/linux-02-linux用户及文件权限管理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux-01-linux简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/10/30/linux-01-linux简介/">linux简介</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2017/10/30/linux-01-linux简介/" class="archive-article-date">
+  	<time datetime="2017-10-30T07:19:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>linux本事只是操作系统的内核，而一个操作系统是介于硬件和应用程序之间，代表内核和系统调用。</p>
+<p><code>cat /proc/version</code> 查看当前操作系统版本信息</p>
+<h3 id="终端"><a href="#终端" class="headerlink" title="终端"></a>终端</h3><p>通常我们在使用 Linux 时，并不是直接与系统打交道，而是通过一个叫做 Shell 的中间程序来完成的。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">按键</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Ctrl+d</td>
+<td style="text-align:left">键盘输入结束或退出终端</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+s</td>
+<td style="text-align:left">暂停当前程序，暂停后按下任意键恢复运行</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+z</td>
+<td style="text-align:left">将当前程序放到后台运行，恢复到前台为命令fg</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+a</td>
+<td style="text-align:left">将光标移至输入行头，相当于Home键</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+e</td>
+<td style="text-align:left">将光标移至输入行末，相当于End键</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+k</td>
+<td style="text-align:left">删除从光标所在位置到行末</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt+Backspace</td>
+<td style="text-align:left">向前删除一个单词</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+PgUp</td>
+<td style="text-align:left">将终端显示向上滚动</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift+PgDn</td>
+<td style="text-align:left">将终端显示向下滚动</td>
+</tr>
+</tbody>
+</table>
+        
+          <a class="article-more-a" href="/blog/2017/10/30/linux-01-linux简介/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2017/10/30/linux-01-linux简介/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ES6学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/10/19/ES6学习/">ES6学习</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2017/10/19/ES6学习/" class="archive-article-date">
+  	<time datetime="2017-10-19T07:28:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于执行顺序"><a href="#关于执行顺序" class="headerlink" title="关于执行顺序"></a>关于执行顺序</h2><p><code>setTimeout</code>, <code>setInterval</code>, <code>setImmediate</code>, <code>process.nextTick</code></p>
+<p>目前根据我了解的是由于 <code>js</code> 是单线程，所以通过事件循环 <code>Event loop</code> 实现代码的异步执行。<br>其可理解为是在代码执行时，有一个任务队列，在执行完所有同步代码后，再按序执行队列的代码。</p>
+<p>然后再分析执行顺序，定时器都是插入到队尾，<code>nextTick</code> 可理解为插入到队头(实际上是在队列执行前)，<br>其他的如 <code>Promise</code> 是在队列中排队</p>
+<p>需要注意的是，下面两个的执行顺序是不定的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</div><div class="line">&#125;, <span class="number">0</span>);</div><div class="line"></div><div class="line">setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'setImmediate'</span>);</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 我执行了10次，测的结果是6次 timeout 先于 immediate</span></div></pre></td></tr></table></figure></p>
+<p>据此就可以代码测试了</p>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>Class 内的 所有函数都相当于写在 prototype 对象中</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES6</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2017/10/19/ES6学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-find-grep" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -167,7 +676,12 @@
       
         <p>find和grep的使用权限是所有用户</p>
 <h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">find 命令的作用是在目录中根据文件名搜索文件。</div><div class="line">find 列出当前目录及其子目录的所有文件和文件夹的完整路径。</div><div class="line">find -name Help.java 在当前目录及其子目录中搜索文件名为Help.java的文件。</div><div class="line">find . -name Help.java 在当前目录及其子目录中搜索文件名为Help.java的文件(同上)。</div><div class="line">find / -name Help.java 在整个硬盘中搜索文件名为Help.java的文件。</div><div class="line">find -perm 755 在当前目录及其子目录中查找指定权限的文件</div><div class="line">find -type b 在当前目录及其子目录下查找块设备文件。</div><div class="line">find -type d 在当前目录及其子目录下查文件夹。</div><div class="line">find -type c 在当前目录及其子目录下查找字符设备文件。</div><div class="line">find -type p 在当前目录及其子目录下查找管道文件。</div><div class="line">find -type l 在当前目录及其子目录下查找符号链接文件。</div><div class="line">find -type f 在当前目录及其子目录下查找普通文件。</div><div class="line">find -type d -exec ls -l &#123;&#125; \; 查找当前目录及其子目录下的文件夹，并将查找结果以ls -l的方式展现。</div><div class="line">find -type d -ok rm -rf &#123;&#125; \;查找当前目录及其子目录下的文件夹，并将查找结果依次执行rm -rf命令，但是在执行命令前会有确认提示。</div></pre></td></tr></table></figure>
-<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">grep 命令的作用是在目录中根据文件内容搜索文件。</div><div class="line">grep Clock * 查找当前目录下的所有文件中包含Clock字符串的文件，不查找子目录。</div><div class="line">grep -r Clock * 查找当前目录下的所有文件中包含Clock字符串的文件，查找子目录。</div><div class="line">grep -nr Clock * 查找当前目录下的所有文件中包含Clock字符串的文件，查找子目录，并显示行号。</div></pre></td></tr></table></figure>
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">grep 命令的作用是在目录中根据文件内容搜索文件。</div><div class="line">grep Clock * 查找当前目录下的所有文件中包含Clock字符串的文件，不查找子目录。</div><div class="line">grep -r Clock * 查找当前目录下的所有文件中包含Clock字符串的文件，查找子目录。</div><div class="line">grep -nr Clock * 查找当前目录下的所有文件中包含Clock字符串的文件，查找子目录，并显示行号。</div><div class="line">grep -E &quot;[a-z]&quot; 使用正则查找</div></pre></td></tr></table></figure>
+<p>只输出文件中匹配到的部分 -o 选项，不加 -o 则是高亮匹配项，然后输出所有</p>
+<blockquote>
+<p>echo this is a test line. | grep -o -E “[a-z]+.“<br>line.<br>echo this is a test line. | egrep -o “[a-z]+.“<br>line.</p>
+</blockquote>
+<p><a href="http://man.linuxde.net/grep" target="_blank" rel="external">Linux命令大全-grep</a></p>
 
       
 
@@ -676,103 +1190,10 @@
 
 
   
-    <article id="post-zepto中的正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/09/09/zepto中的正则表达式/">zepto中的正则表达式</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2017/09/09/zepto中的正则表达式/" class="archive-article-date">
-  	<time datetime="2017-09-09T07:41:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="s-lt-w-gt-gt"><a href="#s-lt-w-gt-gt" class="headerlink" title="/^\s&lt;(\w+|!)[^&gt;]&gt;/"></a>/^\s<em>&lt;(\w+|!)[^&gt;]</em>&gt;/</h3><ul>
-<li>fragmentRE = /^\s<em>&lt;(\w+|!)[^&gt;]</em>&gt;/</li>
-<li>匹配 <code>html</code> 字符串，用来测试字符串是否是 <code>html</code></li>
-<li><code>\s</code> 表示所有空格类型，空格、回车、换行</li>
-<li><code>(\w+|!)</code> 表示 <code>word</code> 或 <code>!</code> 叹号是指注释 <code>&lt;!--&lt;span&gt;&lt;/span&gt;--&gt;</code></li>
-<li><code>[^&gt;]</code> 表示不能是大于号的所有字符</li>
-</ul>
-<h3 id="w"><a href="#w" class="headerlink" title="/^[\w-]*$/"></a>/^[\w-]*$/</h3><ul>
-<li>simpleSelectorRE = /^[\w-]*$/</li>
-<li>表示简单正则，匹配可包含 <code>word</code> 和 <code>-</code> 的字符串</li>
-</ul>
-        
-          <a class="article-more-a" href="/blog/2017/09/09/zepto中的正则表达式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">正则</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2017/09/09/zepto中的正则表达式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -870,6 +1291,26 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">正则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -882,23 +1323,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">正则</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
             
             <div class="clearfix"></div>
@@ -951,6 +1384,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           
             <li class="search-li">
               <a href="https://developer.mozilla.org/zh-CN/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>MDN</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://man.linuxde.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Linux 命令大全</a>
             </li>
           
             <li class="search-li">
