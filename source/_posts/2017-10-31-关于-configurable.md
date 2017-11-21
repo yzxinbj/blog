@@ -16,6 +16,8 @@ Object.defineProperty(obj, 'key', {
   value: 'static' // 值
 });
 ```
+例子如下
+<!--more-->
 
 ```javascript
 // 当 configurable 为 false 时
