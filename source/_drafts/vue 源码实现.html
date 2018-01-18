@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 数据劫持就是所有对象全部通过 definProperty 定义，利用 get, set 函数
+
+    function MyVue(options = {}){
+        this.$options = options;
+        // this._data
+        var data = this._data = this.$options.data;
+
+        observe(data);
+        
+        for(let key in data){
+            
+        }
+    }
+
+
+    function Observe(data){
+        for(let key in data){
+            let val = data[key];
+            observe()
+            Object.defineProperty(data, key, {
+                enumerable: true,
+                get(){
+                    return val;
+                },
+                set(newVal){
+                    if(newVal === val){
+                        return;
+                    }
+                    
+                    val = newVal;
+                    
+                    observe(newVal);
+                }
+            })
+        }
+    }
+
+    // 观察对象，给对象增加Object.defineProperty
+    function observe(data){
+        if(Object.toString(data)){
+            
+        }
+        return new Observe(data);
+    }
+</script>
+</html>
