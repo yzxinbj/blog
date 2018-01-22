@@ -1,8 +1,10 @@
 ---
 title: generator函数
+date: 2018-01-22 17:06:59
 tags:
 categories:
 ---
+
 
 ## generator 函数
 > generator : 发生器，生成器
@@ -31,6 +33,7 @@ yield*后面跟的是一个可遍历的结构，它会调用该结构的遍历�
 调用 Generator 函数，该函数并不执行，而是返回一个遍历器对象（Iterator Object）
 
 ## 那什么是遍历器对象？
+<!--more-->
 > 遍历器对象：一个可以被 `for of`循环 和 `...` 解构的对象的`[Symbol.iterator]()`的返回值
 > 此对象内包含一个`next`函数，通过一遍一遍的调用此函数可以控制遍历的过程
 > 调用`next`函数会返回此对象的每个属性值`value` 和 是否便利到了最后一个属性 `done`--> {value: 11010, done: false}

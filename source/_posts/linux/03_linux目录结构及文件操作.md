@@ -12,6 +12,8 @@ linux 的目录结构大部分目录结构是规定好的，多数 linux系统�
 
 FHS 定义了两层规范，第一层是， / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
 
+<!--more-->
+
 第二层则是针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
 
 [可以看实验楼的介绍图](https://dn-anything-about-doc.qbox.me/linux_base/4-1.png/logoblackfont)
