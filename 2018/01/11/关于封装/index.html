@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>关于封装 | the_road_to_rdinary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对象封装什么是对象？  对象：无序属性的集合，其属性可以包含基本值，对象或者函数  创建对象的方法有多少种？  var obj = {}; // 字面量 var obj = new Object(); // new  封装对象的目的是什么？  隐藏细节实现，开放接口调用 复用，使逻辑清晰，代码好维护  怎么封装？  原型链? 继承? new?1234567891011function Base(n">
+  <meta name="description" content="对象封装什么是对象？ 对象：无序属性的集合，其属性可以包含基本值，对象或者函数  创建对象的方法有多少种？ var obj = {}; // 字面量 var obj = new Object(); // new  封装对象的目的是什么？ 隐藏细节实现，开放接口调用 复用，使逻辑清晰，代码好维护  怎么封装？原型链?123456789101112131415161718192021222324252">
 <meta name="keywords" content="js object">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于封装">
 <meta property="og:url" content="http://yoursite.com/2018/01/11/关于封装/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
-<meta property="og:description" content="对象封装什么是对象？  对象：无序属性的集合，其属性可以包含基本值，对象或者函数  创建对象的方法有多少种？  var obj = {}; // 字面量 var obj = new Object(); // new  封装对象的目的是什么？  隐藏细节实现，开放接口调用 复用，使逻辑清晰，代码好维护  怎么封装？  原型链? 继承? new?1234567891011function Base(n">
-<meta property="og:updated_time" content="2018-01-22T09:05:54.000Z">
+<meta property="og:description" content="对象封装什么是对象？ 对象：无序属性的集合，其属性可以包含基本值，对象或者函数  创建对象的方法有多少种？ var obj = {}; // 字面量 var obj = new Object(); // new  封装对象的目的是什么？ 隐藏细节实现，开放接口调用 复用，使逻辑清晰，代码好维护  怎么封装？原型链?123456789101112131415161718192021222324252">
+<meta property="og:updated_time" content="2018-01-22T13:33:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于封装">
-<meta name="twitter:description" content="对象封装什么是对象？  对象：无序属性的集合，其属性可以包含基本值，对象或者函数  创建对象的方法有多少种？  var obj = {}; // 字面量 var obj = new Object(); // new  封装对象的目的是什么？  隐藏细节实现，开放接口调用 复用，使逻辑清晰，代码好维护  怎么封装？  原型链? 继承? new?1234567891011function Base(n">
+<meta name="twitter:description" content="对象封装什么是对象？ 对象：无序属性的集合，其属性可以包含基本值，对象或者函数  创建对象的方法有多少种？ var obj = {}; // 字面量 var obj = new Object(); // new  封装对象的目的是什么？ 隐藏细节实现，开放接口调用 复用，使逻辑清晰，代码好维护  怎么封装？原型链?123456789101112131415161718192021222324252">
   
   
     <link rel="icon" href="/favicon.png">
@@ -168,27 +168,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="对象封装"><a href="#对象封装" class="headerlink" title="对象封装"></a>对象封装</h2><p>什么是对象？</p>
-<blockquote>
+        <h2 id="对象封装"><a href="#对象封装" class="headerlink" title="对象封装"></a>对象封装</h2><h3 id="什么是对象？"><a href="#什么是对象？" class="headerlink" title="什么是对象？"></a>什么是对象？</h3><blockquote>
 <p>对象：无序属性的集合，其属性可以包含基本值，对象或者函数</p>
 </blockquote>
-<p>创建对象的方法有多少种？</p>
-<ul>
+<h3 id="创建对象的方法有多少种？"><a href="#创建对象的方法有多少种？" class="headerlink" title="创建对象的方法有多少种？"></a>创建对象的方法有多少种？</h3><ul>
 <li>var obj = {}; // 字面量</li>
 <li>var obj = new Object(); // new</li>
 </ul>
-<p>封装对象的目的是什么？</p>
-<ul>
+<h3 id="封装对象的目的是什么？"><a href="#封装对象的目的是什么？" class="headerlink" title="封装对象的目的是什么？"></a>封装对象的目的是什么？</h3><ul>
 <li>隐藏细节实现，开放接口调用</li>
 <li>复用，使逻辑清晰，代码好维护</li>
 </ul>
-<p>怎么封装？</p>
-<ul>
-<li>原型链?</li>
-<li>继承?</li>
-<li>new?<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function Base(name, age)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var obj = new Base();</div><div class="line"></div><div class="line">// new 等价于</div><div class="line">var obj = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj);</div></pre></td></tr></table></figure>
-</li>
-</ul>
+<h3 id="怎么封装？"><a href="#怎么封装？" class="headerlink" title="怎么封装？"></a>怎么封装？</h3><h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链?"></a>原型链?</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 工厂模式</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPoint</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> point = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">    </div><div class="line">    point.x = x;</div><div class="line">    point.y = y;</div><div class="line">    </div><div class="line">    point.getX = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> x;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    point.getY = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">return</span> y;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> point;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 构造函数模式</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.x = x;</div><div class="line">    <span class="keyword">this</span>.y = y;</div><div class="line">    </div><div class="line">    <span class="keyword">this</span>.getX = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">this</span>.x;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="keyword">this</span>.getY = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.y;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> point = <span class="keyword">new</span> Point(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="comment">// 原型建立公私有属性或方法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.x = x;</div><div class="line">    <span class="keyword">this</span>.y = y;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Point.prototype.getX = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.x;</div><div class="line">&#125;;</div><div class="line">Point.prototype.getY = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.y;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 或者</span></div><div class="line">Point.protoType = &#123;</div><div class="line">    getX: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.x;</div><div class="line">    &#125;,</div><div class="line">    getY: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.y;</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 注意这种方式必须要加 constructor, 因为 &#123;&#125; 表示一个新的对象，其中并不包含 constructor </span></div><div class="line">    <span class="keyword">constructor</span>: Point</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：加 constructor 的情况要记住, 因为 {} 表示一个新的对象，其中并不包含 constructor </p>
+</blockquote>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承?"></a>继承?</h4><h4 id="new"><a href="#new" class="headerlink" title="new?"></a>new?</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function Base(name, age)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var obj = new Base();</div><div class="line"></div><div class="line">// new 等价于</div><div class="line">var obj = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj, name, age);</div><div class="line"></div><div class="line">obj instanceof Base // true</div></pre></td></tr></table></figure>
 
       
 

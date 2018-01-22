@@ -172,11 +172,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">generator</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span>* [<span class="number">2</span>,<span class="number">3</span>];</div><div class="line">    <span class="keyword">return</span> <span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> iterator = generator();</div><div class="line">iterator.next()   <span class="comment">// &#123; value: 1, done: false &#125;</span></div><div class="line">iterator.next()   <span class="comment">// &#123; value: 2, done: false &#125;</span></div><div class="line">iterator.next()   <span class="comment">// &#123; value: 3, done: false &#125;</span></div><div class="line">iterator.next()   <span class="comment">// &#123; value: 4, done: false &#125;</span></div><div class="line">iterator.next()   <span class="comment">// &#123; value: undefined, done: true &#125;</span></div></pre></td></tr></table></figure>
 <p>yield*后面跟的是一个可遍历的结构，它会调用该结构的遍历器接口</p>
 <p>调用 Generator 函数，该函数并不执行，而是返回一个遍历器对象（Iterator Object）</p>
-<h2 id="那什么是遍历器对象？"><a href="#那什么是遍历器对象？" class="headerlink" title="那什么是遍历器对象？"></a>那什么是遍历器对象？</h2><blockquote>
-<p>遍历器对象：一个可以被 <code>for of</code>循环 和 <code>...</code> 解构的对象的<code>[Symbol.iterator]()</code>的返回值<br>此对象内包含一个<code>next</code>函数，通过一遍一遍的调用此函数可以控制遍历的过程<br>调用<code>next</code>函数会返回此对象的每个属性值<code>value</code> 和 是否便利到了最后一个属性 <code>done</code>–&gt; {value: 11010, done: false}</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">  data: [ <span class="string">'hello'</span>, <span class="string">'world'</span> ],</div><div class="line">  [<span class="built_in">Symbol</span>.iterator]() &#123;</div><div class="line">    <span class="keyword">const</span> self = <span class="keyword">this</span>;</div><div class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      next() &#123;</div><div class="line">        <span class="keyword">if</span> (index &lt; self.data.length) &#123;</div><div class="line">          <span class="keyword">return</span> &#123;</div><div class="line">            value: self.data[index++],</div><div class="line">            done: <span class="literal">false</span></div><div class="line">          &#125;;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      <span class="keyword">return</span>() &#123;</div><div class="line">          <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">console</span>.log([...obj]);<span class="comment">// [ 'hello', 'world' ]</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">of</span> obj)&#123;</div><div class="line">    <span class="built_in">console</span>.log(key);</div><div class="line">&#125;</div><div class="line"><span class="comment">// hello </span></div><div class="line"><span class="comment">// world</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">* 上面和下面两种写法的共同点就是</span></div><div class="line"><span class="comment">* 当[Symbol.iterator]() 函数被调用都会返回一个遍历器对象</span></div><div class="line"><span class="comment">* </span></div><div class="line"><span class="comment">* 那现在就可以理解为，利用[Symbol.iterator]() 函数，我们可以控制遍历的顺序</span></div><div class="line"><span class="comment">* 而利用 generator 函数配合使用可以更简单方便的控制每一次遍历的值和顺序，直观清晰的知道每一次遍历的是哪个值，顺序是怎样</span></div><div class="line"><span class="comment">*/</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">let</span> myIterable = &#123;</div><div class="line">  [<span class="built_in">Symbol</span>.iterator]: <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">[...myIterable] <span class="comment">// [1, 2, 3]</span></div><div class="line"></div><div class="line"><span class="comment">// 或者采用下面的简洁写法</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">  * [<span class="built_in">Symbol</span>.iterator]() &#123;</div><div class="line">    <span class="keyword">yield</span> <span class="string">'hello'</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="string">'world'</span>;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> x <span class="keyword">of</span> obj) &#123;</div><div class="line">  <span class="built_in">console</span>.log(x);</div><div class="line">&#125;</div><div class="line"><span class="comment">// "hello"</span></div><div class="line"><span class="comment">// "world"</span></div></pre></td></tr></table></figure>
-
+<h2 id="那什么是遍历器对象？"><a href="#那什么是遍历器对象？" class="headerlink" title="那什么是遍历器对象？"></a>那什么是遍历器对象？</h2>
+        
+          <a class="article-more-a" href="/blog/2018/01/22/generator函数/#more">more >></a>
+        
       
 
       
@@ -238,27 +237,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="对象封装"><a href="#对象封装" class="headerlink" title="对象封装"></a>对象封装</h2><p>什么是对象？</p>
-<blockquote>
+        <h2 id="对象封装"><a href="#对象封装" class="headerlink" title="对象封装"></a>对象封装</h2><h3 id="什么是对象？"><a href="#什么是对象？" class="headerlink" title="什么是对象？"></a>什么是对象？</h3><blockquote>
 <p>对象：无序属性的集合，其属性可以包含基本值，对象或者函数</p>
 </blockquote>
-<p>创建对象的方法有多少种？</p>
-<ul>
+<h3 id="创建对象的方法有多少种？"><a href="#创建对象的方法有多少种？" class="headerlink" title="创建对象的方法有多少种？"></a>创建对象的方法有多少种？</h3><ul>
 <li>var obj = {}; // 字面量</li>
 <li>var obj = new Object(); // new</li>
 </ul>
-<p>封装对象的目的是什么？</p>
-<ul>
+<h3 id="封装对象的目的是什么？"><a href="#封装对象的目的是什么？" class="headerlink" title="封装对象的目的是什么？"></a>封装对象的目的是什么？</h3><ul>
 <li>隐藏细节实现，开放接口调用</li>
 <li>复用，使逻辑清晰，代码好维护</li>
 </ul>
-<p>怎么封装？</p>
-<ul>
-<li>原型链?</li>
-<li>继承?</li>
-<li>new?<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function Base(name, age)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var obj = new Base();</div><div class="line"></div><div class="line">// new 等价于</div><div class="line">var obj = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj);</div></pre></td></tr></table></figure>
-</li>
-</ul>
+<h3 id="怎么封装？"><a href="#怎么封装？" class="headerlink" title="怎么封装？"></a>怎么封装？</h3><h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链?"></a>原型链?</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 工厂模式</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPoint</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> point = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">    </div><div class="line">    point.x = x;</div><div class="line">    point.y = y;</div><div class="line">    </div><div class="line">    point.getX = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> x;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    point.getY = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">return</span> y;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> point;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 构造函数模式</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.x = x;</div><div class="line">    <span class="keyword">this</span>.y = y;</div><div class="line">    </div><div class="line">    <span class="keyword">this</span>.getX = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">this</span>.x;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="keyword">this</span>.getY = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.y;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> point = <span class="keyword">new</span> Point(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="comment">// 原型建立公私有属性或方法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.x = x;</div><div class="line">    <span class="keyword">this</span>.y = y;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Point.prototype.getX = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.x;</div><div class="line">&#125;;</div><div class="line">Point.prototype.getY = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.y;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 或者</span></div><div class="line">Point.protoType = &#123;</div><div class="line">    getX: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.x;</div><div class="line">    &#125;,</div><div class="line">    getY: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.y;</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 注意这种方式必须要加 constructor, 因为 &#123;&#125; 表示一个新的对象，其中并不包含 constructor </span></div><div class="line">    <span class="keyword">constructor</span>: Point</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：加 constructor 的情况要记住, 因为 {} 表示一个新的对象，其中并不包含 constructor </p>
+</blockquote>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承?"></a>继承?</h4><h4 id="new"><a href="#new" class="headerlink" title="new?"></a>new?</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function Base(name, age)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var obj = new Base();</div><div class="line"></div><div class="line">// new 等价于</div><div class="line">var obj = &#123;&#125;;</div><div class="line">obj.__proto__ = Base.prototype;</div><div class="line">Base.call(obj, name, age);</div><div class="line"></div><div class="line">obj instanceof Base // true</div></pre></td></tr></table></figure>
 
       
 
@@ -349,21 +343,10 @@
 <li>为什么浅复制，深复制怎么实现</li>
 </ul>
 <h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><blockquote>
-<p>思考：如果有重名变量，函数时如何确定当前程序是取得哪个变量？</p>
-</blockquote>
-<p>每次当控制器转到可执行代码的时候，就会进入一个执行上下文。<br>执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。<br>JavaScript中的运行环境大概包括三种情况。</p>
-<ul>
-<li>全局环境：JavaScript代码运行起来会首先进入该环境</li>
-<li>函数环境：当函数被调用执行时，会进入当前函数中执行代码</li>
-<li>eval（不建议使用，可忽略）</li>
-</ul>
-<p>函数调用栈(call stack)，栈底永远都是全局上下文，栈顶是当前正在执行的上下文。</p>
-<h2 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h2><p>当调用一个函数时（激活），一个新的执行上下文就会被创建。而一个执行上下文的生命周期可以分为两个阶段。</p>
-<ul>
-<li>创建阶段<br>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</li>
-<li>代码执行阶段<br>创建完成之后，就会开始执行代码，这个时候，会完成变量赋值，函数引用，以及执行其他代码。</li>
-</ul>
-
+<p>思考：如果有重名变量，函数时如何确定当前程序是取得哪个变量？<br>
+        
+          <a class="article-more-a" href="/blog/2018/01/04/js知识分享/#more">more >></a>
+        
       
 
       
@@ -448,35 +431,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="入口函数"><a href="#入口函数" class="headerlink" title="入口函数"></a>入口函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int WINAPI WinMain</div><div class="line">(  </div><div class="line">      HINSTANCE hInstance,      // handle to current instance</div><div class="line">      HINSTANCE hPrevInstance,  // handle to previous instance</div><div class="line">      LPSTR lpCmdLine,          // command line</div><div class="line">      int nCmdShow              // show state</div><div class="line">);</div></pre></td></tr></table></figure>
-<h3 id="窗口程序的编程步骤"><a href="#窗口程序的编程步骤" class="headerlink" title="窗口程序的编程步骤"></a>窗口程序的编程步骤</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">step1:初始化一个WNDCLASS;</div><div class="line"></div><div class="line">step2:向OS注册一下[你开店了总要向工商总局注册一下吧]</div><div class="line"></div><div class="line">step3:调用CreateWindow()创建出窗口;</div><div class="line"></div><div class="line">step4:获取OS发送来的各类消息;</div><div class="line"></div><div class="line">step5:分发获取到的消息;</div></pre></td></tr></table></figure>
-<h3 id="调试函数"><a href="#调试函数" class="headerlink" title="调试函数"></a>调试函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">AllocConsole();</div><div class="line"></div><div class="line">freopen(&quot;CONOUT$&quot;,&quot;w&quot;,stdout);</div><div class="line"></div><div class="line">FreeConsole();</div></pre></td></tr></table></figure>
-<h3 id="窗口下输出文本"><a href="#窗口下输出文本" class="headerlink" title="窗口下输出文本"></a>窗口下输出文本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">BOOL TextOut</div><div class="line">(  </div><div class="line">  HDC hdc,           // handle to DC</div><div class="line">  int nXStart,       // x-coordinate of starting position</div><div class="line">  int nYStart,       // y-coordinate of starting position</div><div class="line">  LPCTSTR lpString,  // character string</div><div class="line">  int cbString       // number of characters</div><div class="line">);</div><div class="line">int DrawText</div><div class="line">(  </div><div class="line">  HDC hDC,          // handle to DC</div><div class="line">  LPCTSTR lpString, // text to draw  </div><div class="line">  int nCount,       // text length</div><div class="line">  LPRECT lpRect,    // formatting dimensions</div><div class="line">  UINT uFormat      // text-drawing options</div><div class="line">);</div></pre></td></tr></table></figure>
-<p>1、设备环境是什么</p>
-<blockquote>
-<p>设备环境又称之为设备上下文，用以描述当前绘制的设备的属性，比如画笔的线宽，线型，颜色，背景色等等属性；</p>
-</blockquote>
-<p>2、设备环境的作用</p>
-<blockquote>
-<p>使得绘制操作可以独立于具体的设备，做到设备无关</p>
-</blockquote>
-<h3 id="设配环境的获取与释放"><a href="#设配环境的获取与释放" class="headerlink" title="设配环境的获取与释放"></a>设配环境的获取与释放</h3><p>WM_PAINT消息中<br>使用 BeginPaint()获取设备环境，EndPaint()释放设备环境</p>
-<p>其他场景中<br>使用GetDC()获取设备环境，ReleaseDC()释放设备环境</p>
-<h3 id="一些操作"><a href="#一些操作" class="headerlink" title="一些操作"></a>一些操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">获取/设置文本背景色：GetTextColor/SetTextColor</div><div class="line"></div><div class="line">获取/设置文本颜色：GetBkColor/SetBkColor</div><div class="line"></div><div class="line">获取/设置绘制模式：GetBkMode/SetBkMode</div><div class="line"></div><div class="line">获取/设置文本对齐方式：GetTextAlign/SetTextAlign</div></pre></td></tr></table></figure>
-<h3 id="控件"><a href="#控件" class="headerlink" title="控件"></a>控件</h3><p>1、概念：</p>
-<blockquote>
-<p>WINDOWS 提供了几个预定义的窗口类以方便我们的使用,我们一般就它们叫做子窗口或者控件。</p>
-</blockquote>
-<p>2、控件与父窗口的交互：</p>
-<blockquote>
-<p>由于子控件有自己的回调函数，所以控件会自己处理消息，<br>并在自己状态发生改变时通知父窗口。</p>
-</blockquote>
-<p>3、预定义的控件有：</p>
-<blockquote>
-<p>按钮、复选框、编辑框、静态字符串标签和滚动条等</p>
-</blockquote>
-<p>作业：<br>1,什么是设备对象？<br>3.对照视频中的代码流程写一个程序，要求在程序上点击左键，显示红色的编程达人，点击右键显示黄色的欢迎你的字样效果        </p>
-<p>作业：创建一个窗口应用程序，点击左键就由该程序再创建一个新的模态对话框，同理右键弹出非模态对话框，<br>扩展：创建一个应用程序，该应用程序一开始有一个登陆验证，该登陆验证需要输入账号密码，账号密码你们自己设定，只有验证通过以后才能进入真正的主程序窗口</p>
-
+<h3 id="窗口程序的编程步骤"><a href="#窗口程序的编程步骤" class="headerlink" title="窗口程序的编程步骤"></a>窗口程序的编程步骤</h3>
+        
+          <a class="article-more-a" href="/blog/2017/11/21/win32-01-win32/#more">more >></a>
+        
       
 
       
@@ -651,53 +609,9 @@
 <p>FHS（filesystem Hierarchy Standard）: 文件系统层次结构标准</p>
 </blockquote>
 <p>FHS 定义了两层规范，第一层是， / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。</p>
-<p>第二层则是针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。</p>
-<p><a href="https://dn-anything-about-doc.qbox.me/linux_base/4-1.png/logoblackfont" target="_blank" rel="external">可以看实验楼的介绍图</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">可分享的(shareablel)</th>
-<th style="text-align:left">不可分享的(unshareable)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">不可变的(static)</td>
-<td style="text-align:left">/usr(软件放置处)</td>
-<td style="text-align:left">/etc(配置文件)</td>
-</tr>
-<tr>
-<td style="text-align:left">不可变的(static)</td>
-<td style="text-align:left">/opt(第三方软件)</td>
-<td style="text-align:left">/boot(开机及内核文件)</td>
-</tr>
-<tr>
-<td style="text-align:left">可变的(variable)</td>
-<td style="text-align:left">/var/mail(用户邮件信箱)</td>
-<td style="text-align:left">/var/run(程序相关)</td>
-</tr>
-<tr>
-<td style="text-align:left">可变的(variable)</td>
-<td style="text-align:left">/var/news(新闻组)</td>
-<td style="text-align:left">/var/lock(文件锁相关)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><ul>
-<li><code>touch</code></li>
-<li><code>mkdir</code></li>
-<li><code>cp</code> 拷贝复制文件，如果是目录，-r -R(这俩一样) 递归复制</li>
-<li><code>rm</code> 删除文件</li>
-<li><code>mv</code> 移动文件，就是剪切，重命名</li>
-<li><code>rename</code> 批量重命名</li>
-<li><code>cat</code> <code>tac</code> 打印文件内容到标准输出（终端）<blockquote>
-<p>标准输入输出：当我们执行一个 shell 命令行时通常会自动打开三个标准文件，即标准输入文件（stdin），默认对应终端的键盘、标准输出文件（stdout）和标准错误输出文件（stderr），后两个文件都对应被重定向到终端的屏幕，以便我们能直接看到输出内容。进程将从标准输入文件中得到输入数据，将正常输出数据输出到标准输出文件，而将错误信息送到标准错误文件中。</p>
-</blockquote>
-</li>
-<li><code>nl</code> 添加行号并打印</li>
-</ul>
-
+        
+          <a class="article-more-a" href="/blog/2017/11/02/linux-03-linux目录结构及文件操作/#more">more >></a>
+        
       
 
       
