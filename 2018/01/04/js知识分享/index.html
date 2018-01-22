@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/11 | the_road_to_rdinary</title>
+  <title>js相关知识分享 | the_road_to_rdinary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="the_road_to_rdinary">
-<meta property="og:url" content="http://yoursite.com/archives/2017/11/index.html">
+  <meta name="description" content="关于变量 基础数据类型：Undefined、Null、Boolean、Number、String、Symbol 引用数据类型：Array、Object 为什么浅复制，深复制怎么实现  执行上下文 思考：如果有重名变量，函数时如何确定当前程序是取得哪个变量？  每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js相关知识分享">
+<meta property="og:url" content="http://yoursite.com/2018/01/04/js知识分享/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
+<meta property="og:description" content="关于变量 基础数据类型：Undefined、Null、Boolean、Number、String、Symbol 引用数据类型：Array、Object 为什么浅复制，深复制怎么实现  执行上下文 思考：如果有重名变量，函数时如何确定当前程序是取得哪个变量？  每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中">
+<meta property="og:updated_time" content="2018-01-22T09:18:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="the_road_to_rdinary">
+<meta name="twitter:title" content="js相关知识分享">
+<meta name="twitter:description" content="关于变量 基础数据类型：Undefined、Null、Boolean、Number、String、Symbol 引用数据类型：Array、Object 为什么浅复制，深复制怎么实现  执行上下文 思考：如果有重名变量，函数时如何确定当前程序是取得哪个变量？  每次当控制器转到可执行代码的时候，就会进入一个执行上下文。执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。JavaScript中">
   
   
     <link rel="icon" href="/favicon.png">
@@ -143,48 +148,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-js知识分享" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2017/11/21/win32-01-win32/" class="archive-article-date">
-  	<time datetime="2017-11-21T09:31:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/11/21/win32-01-win32/">win32学习</a>
+    <h1 class="article-title" itemprop="name">
+      js相关知识分享
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/blog/2018/01/04/js知识分享/" class="archive-article-date">
+  	<time datetime="2018-01-04T06:39:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="关于变量"><a href="#关于变量" class="headerlink" title="关于变量"></a>关于变量</h3><ul>
+<li>基础数据类型：<code>Undefined、Null、Boolean、Number、String、Symbol</code></li>
+<li>引用数据类型：<code>Array、Object</code></li>
+<li>为什么浅复制，深复制怎么实现</li>
+</ul>
+<h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><blockquote>
+<p>思考：如果有重名变量，函数时如何确定当前程序是取得哪个变量？</p>
+</blockquote>
+<p>每次当控制器转到可执行代码的时候，就会进入一个执行上下文。<br>执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。<br>JavaScript中的运行环境大概包括三种情况。</p>
+<ul>
+<li>全局环境：JavaScript代码运行起来会首先进入该环境</li>
+<li>函数环境：当函数被调用执行时，会进入当前函数中执行代码</li>
+<li>eval（不建议使用，可忽略）</li>
+</ul>
+<p>函数调用栈(call stack)，栈底永远都是全局上下文，栈顶是当前正在执行的上下文。</p>
+<h2 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h2><p>当调用一个函数时（激活），一个新的执行上下文就会被创建。而一个执行上下文的生命周期可以分为两个阶段。</p>
+<ul>
+<li>创建阶段<br>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</li>
+<li>代码执行阶段<br>创建完成之后，就会开始执行代码，这个时候，会完成变量赋值，函数引用，以及执行其他代码。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">win32</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -197,93 +220,113 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/04/js知识分享/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2017/11/17/c-01c-学习/" class="archive-article-date">
-  	<time datetime="2017-11-17T10:25:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/blog/2018/01/11/关于封装/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          关于封装
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2017/11/21/win32-01-win32/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">win32学习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/11/17/c-01c-学习/">c/c++/win32</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c c++ win32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2017/11/02/linux-03-linux目录结构及文件操作/" class="archive-article-date">
-  	<time datetime="2017-11-02T03:15:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-02</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/11/02/linux-03-linux目录结构及文件操作/">linux目录结构及文件操作</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -306,8 +349,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

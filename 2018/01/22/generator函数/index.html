@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/11 | the_road_to_rdinary</title>
+  <title>generator函数 | the_road_to_rdinary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="the_road_to_rdinary">
-<meta property="og:url" content="http://yoursite.com/archives/2017/11/index.html">
+  <meta name="description" content="generator 函数 generator : 发生器，生成器  形式上，Generator函数是一个普通函数，但是有两个特征一是，function关键字与函数名之间有一个星号二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”） 123456789101112function *generator() &amp;#123;    yield 1;    yie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="generator函数">
+<meta property="og:url" content="http://yoursite.com/2018/01/22/generator函数/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
+<meta property="og:description" content="generator 函数 generator : 发生器，生成器  形式上，Generator函数是一个普通函数，但是有两个特征一是，function关键字与函数名之间有一个星号二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”） 123456789101112function *generator() &amp;#123;    yield 1;    yie">
+<meta property="og:updated_time" content="2018-01-22T09:06:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="the_road_to_rdinary">
+<meta name="twitter:title" content="generator函数">
+<meta name="twitter:description" content="generator 函数 generator : 发生器，生成器  形式上，Generator函数是一个普通函数，但是有两个特征一是，function关键字与函数名之间有一个星号二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”） 123456789101112function *generator() &amp;#123;    yield 1;    yie">
   
   
     <link rel="icon" href="/favicon.png">
@@ -143,147 +147,145 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-generator函数" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      generator函数
+    </h1>
+  
+
+        
+        <a href="/blog/2018/01/22/generator函数/" class="archive-article-date">
+  	<time datetime="2018-01-22T09:06:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="generator-函数"><a href="#generator-函数" class="headerlink" title="generator 函数"></a>generator 函数</h2><blockquote>
+<p>generator : 发生器，生成器</p>
+</blockquote>
+<p>形式上，Generator函数是一个普通函数，但是有两个特征<br>一是，function关键字与函数名之间有一个星号<br>二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">generator</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span>* [<span class="number">2</span>,<span class="number">3</span>];</div><div class="line">    <span class="keyword">return</span> <span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> iterator = generator();</div><div class="line">iterator.next()   <span class="comment">// &#123; value: 1, done: false &#125;</span></div><div class="line">iterator.next()   <span class="comment">// &#123; value: 2, done: false &#125;</span></div><div class="line">iterator.next()   <span class="comment">// &#123; value: 3, done: false &#125;</span></div><div class="line">iterator.next()   <span class="comment">// &#123; value: 4, done: false &#125;</span></div><div class="line">iterator.next()   <span class="comment">// &#123; value: undefined, done: true &#125;</span></div></pre></td></tr></table></figure>
+<p>yield*后面跟的是一个可遍历的结构，它会调用该结构的遍历器接口</p>
+<p>调用 Generator 函数，该函数并不执行，而是返回一个遍历器对象（Iterator Object）</p>
+<h2 id="那什么是遍历器对象？"><a href="#那什么是遍历器对象？" class="headerlink" title="那什么是遍历器对象？"></a>那什么是遍历器对象？</h2><blockquote>
+<p>遍历器对象：一个可以被 <code>for of</code>循环 和 <code>...</code> 解构的对象的<code>[Symbol.iterator]()</code>的返回值<br>此对象内包含一个<code>next</code>函数，通过一遍一遍的调用此函数可以控制遍历的过程<br>调用<code>next</code>函数会返回此对象的每个属性值<code>value</code> 和 是否便利到了最后一个属性 <code>done</code>–&gt; {value: 11010, done: false}</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">  data: [ <span class="string">'hello'</span>, <span class="string">'world'</span> ],</div><div class="line">  [<span class="built_in">Symbol</span>.iterator]() &#123;</div><div class="line">    <span class="keyword">const</span> self = <span class="keyword">this</span>;</div><div class="line">    <span class="keyword">let</span> index = <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      next() &#123;</div><div class="line">        <span class="keyword">if</span> (index &lt; self.data.length) &#123;</div><div class="line">          <span class="keyword">return</span> &#123;</div><div class="line">            value: self.data[index++],</div><div class="line">            done: <span class="literal">false</span></div><div class="line">          &#125;;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="keyword">return</span> &#123; <span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;;</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      <span class="keyword">return</span>() &#123;</div><div class="line">          <span class="keyword">return</span> &#123; <span class="attr">done</span>: <span class="literal">true</span> &#125;;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">console</span>.log([...obj]);<span class="comment">// [ 'hello', 'world' ]</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">of</span> obj)&#123;</div><div class="line">    <span class="built_in">console</span>.log(key);</div><div class="line">&#125;</div><div class="line"><span class="comment">// hello </span></div><div class="line"><span class="comment">// world</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">* 上面和下面两种写法的共同点就是</span></div><div class="line"><span class="comment">* 当[Symbol.iterator]() 函数被调用都会返回一个遍历器对象</span></div><div class="line"><span class="comment">* </span></div><div class="line"><span class="comment">* 那现在就可以理解为，利用[Symbol.iterator]() 函数，我们可以控制遍历的顺序</span></div><div class="line"><span class="comment">* 而利用 generator 函数配合使用可以更简单方便的控制每一次遍历的值和顺序，直观清晰的知道每一次遍历的是哪个值，顺序是怎样</span></div><div class="line"><span class="comment">*/</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">let</span> myIterable = &#123;</div><div class="line">  [<span class="built_in">Symbol</span>.iterator]: <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">[...myIterable] <span class="comment">// [1, 2, 3]</span></div><div class="line"></div><div class="line"><span class="comment">// 或者采用下面的简洁写法</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> obj = &#123;</div><div class="line">  * [<span class="built_in">Symbol</span>.iterator]() &#123;</div><div class="line">    <span class="keyword">yield</span> <span class="string">'hello'</span>;</div><div class="line">    <span class="keyword">yield</span> <span class="string">'world'</span>;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> x <span class="keyword">of</span> obj) &#123;</div><div class="line">  <span class="built_in">console</span>.log(x);</div><div class="line">&#125;</div><div class="line"><span class="comment">// "hello"</span></div><div class="line"><span class="comment">// "world"</span></div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2017" class="archive-year">2017</a>
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2017/11/21/win32-01-win32/" class="archive-article-date">
-  	<time datetime="2017-11-21T09:31:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/11/21/win32-01-win32/">win32学习</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">win32</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/22/generator函数/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2017/11/17/c-01c-学习/" class="archive-article-date">
-  	<time datetime="2017-11-17T10:25:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2018/01/11/关于封装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于封装</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/11/17/c-01c-学习/">c/c++/win32</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c c++ win32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2017/11/02/linux-03-linux目录结构及文件操作/" class="archive-article-date">
-  	<time datetime="2017-11-02T03:15:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-02</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/11/02/linux-03-linux目录结构及文件操作/">linux目录结构及文件操作</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -306,8 +308,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
