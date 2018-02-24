@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="the_road_to_rdinary">
 <meta property="og:description" content="引用张鑫旭大神Blog上引用的一张图 我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制 浏览器默认 &amp;lt; 继承 &amp;lt; 通配符 &amp;lt; 元素 &amp;lt; 类，属性选择器，伪类 &amp;lt; id &amp;lt; 行内 &amp;lt; !important :nth-child  :nth-of-type 区别 p:nth-child(2)表示这个元素要是p标签，且是第">
 <meta property="og:image" content="http://yoursite.com/2018/02/24/css选择器优先级/img/css_selector.png">
-<meta property="og:updated_time" content="2018-02-24T07:10:35.000Z">
+<meta property="og:updated_time" content="2018-02-24T07:56:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css选择器优先级">
 <meta name="twitter:description" content="引用张鑫旭大神Blog上引用的一张图 我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制 浏览器默认 &amp;lt; 继承 &amp;lt; 通配符 &amp;lt; 元素 &amp;lt; 类，属性选择器，伪类 &amp;lt; id &amp;lt; 行内 &amp;lt; !important :nth-child  :nth-of-type 区别 p:nth-child(2)表示这个元素要是p标签，且是第">
@@ -174,6 +174,10 @@
 <p>浏览器默认 &lt; 继承 &lt; 通配符 &lt; 元素 &lt; 类，属性选择器，伪类 &lt; id &lt; 行内 &lt; !important</p>
 <p><code>:nth-child</code>  <code>:nth-of-type</code> 区别</p>
 <p>p:nth-child(2)表示这个元素要是p标签，且是第二个子元素<br>p:nth-of-type(2)表示父标签下的第二个p元素</p>
+<p><code>:only-child</code>  <code>:only-of-type</code> 区别</p>
+<p>p:only-child 选择器选择的是父元素中只有一个子元素，而且只有唯一的一个子元素<br>p:only-of-type 选择器用来选择一个元素是它的父元素的唯一一个相同类型的子元素<br>区别就是：父元素下只能有一个元素 和 父元素下只能有一个p元素但可以有其他元素的区别</p>
+<p><code>::before</code> 伪类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;selector&quot; data-cont=&quot;hello world&quot;&gt;&lt;/div&gt;</div><div class="line">#selector::before&#123;</div><div class="line">    content:attr(data-cont);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="http://www.runoob.com/css/css-pseudo-classes.html" target="_blank" rel="external">所有伪类选择器的具体释义</a></p>
 
       
 
