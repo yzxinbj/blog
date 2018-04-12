@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/15/vue遇到的问题/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
 <meta property="og:description" content="经验教训反复实例化 Vue，其中的el 参数最好指定dom  增加 data 内的对象属性用 Vue.set(this.resObj, &amp;#39;cartype&amp;#39;, &amp;#39;value&amp;#39;)否则对应视图不会变化 注意变量类型，string,number 在 indexOf 方法中的情况 ~符号表示二进制取反，常与 indexOf 方法配合，因为~-1 为 false，~0 为 tr">
-<meta property="og:updated_time" content="2017-09-19T10:24:29.000Z">
+<meta property="og:updated_time" content="2018-03-21T08:43:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue遇到的问题">
 <meta name="twitter:description" content="经验教训反复实例化 Vue，其中的el 参数最好指定dom  增加 data 内的对象属性用 Vue.set(this.resObj, &amp;#39;cartype&amp;#39;, &amp;#39;value&amp;#39;)否则对应视图不会变化 注意变量类型，string,number 在 indexOf 方法中的情况 ~符号表示二进制取反，常与 indexOf 方法配合，因为~-1 为 false，~0 为 tr">
@@ -172,7 +172,8 @@
 <p>增加 <code>data</code> 内的对象属性用 <code>Vue.set(this.resObj, &#39;cartype&#39;, &#39;value&#39;)</code><br>否则对应视图不会变化</p>
 <p>注意变量类型，<code>string</code>,<code>number</code> 在 <code>indexOf</code> 方法中的情况</p>
 <p><code>~</code>符号表示二进制取反，常与 <code>indexOf</code> 方法配合，因为<code>~-1</code> 为 <code>false</code>，<code>~0</code> 为 true，所以可以代替类似 <code>arr.indexOf(123) &gt; -1</code>  这种判断 </p>
-
+<h2 id="sync"><a href="#sync" class="headerlink" title=".sync"></a>.sync</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">comp</span> <span class="attr">:foo.sync</span>=<span class="string">"bar"</span>&gt;</span><span class="tag">&lt;/<span class="name">comp</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">comp</span> <span class="attr">:foo</span>=<span class="string">"bar"</span> @<span class="attr">update:foo</span>=<span class="string">"val =&gt; bar = val"</span>&gt;</span><span class="tag">&lt;/<span class="name">comp</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> &gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript"> <span class="keyword">this</span>.$emit(<span class="string">'update:foo'</span>, newValue)</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"something"</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">input</span></span></div><div class="line"><span class="tag">  <span class="attr">v-bind:value</span>=<span class="string">"something"</span></span></div><div class="line"><span class="tag">  <span class="attr">v-on:input</span>=<span class="string">"something = $event.target.value"</span>&gt;</span></div><div class="line"> </div><div class="line"> </div><div class="line"> </div><div class="line"><span class="tag">&lt;<span class="name">custom-input</span> <span class="attr">v-model</span>=<span class="string">"something"</span>&gt;</span><span class="tag">&lt;/<span class="name">custom-input</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">custom-input</span></span></div><div class="line"><span class="tag">  <span class="attr">v-bind:value</span>=<span class="string">"something"</span></span></div><div class="line"><span class="tag">  <span class="attr">v-on:input</span>=<span class="string">"something = arguments[0]"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">custom-input</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> &gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript"> <span class="keyword">this</span>.$emit(<span class="string">'input'</span>, newValue)</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
       
 
       
@@ -403,10 +404,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -415,11 +412,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vue js</a>
+                <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">正则</a>
+                <a href="javascript:void(0)" class="js-tag color2">vue js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -427,23 +424,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">正则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -459,7 +444,27 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js object</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">

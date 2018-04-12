@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>css选择器优先级 | the_road_to_rdinary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="引用张鑫旭大神Blog上引用的一张图 我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制 浏览器默认 &amp;lt; 继承 &amp;lt; 通配符 &amp;lt; 元素 &amp;lt; 类，属性选择器，伪类 &amp;lt; id &amp;lt; 行内 &amp;lt; !important :nth-child  :nth-of-type 区别 p:nth-child(2)表示这个元素要是p标签，且是第">
+  <meta name="description" content="引用张鑫旭大神Blog上引用的一张图 我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制 浏览器默认 &amp;lt; 继承 &amp;lt; 通配符 &amp;lt; 元素 &amp;lt; 类，属性选择器，伪类 &amp;lt; id &amp;lt; 行内 &amp;lt; !important 123456789101112131415161718192021222324&amp;lt;!DOCTYPE html&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="css选择器优先级">
 <meta property="og:url" content="http://yoursite.com/2018/02/24/css选择器优先级/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
-<meta property="og:description" content="引用张鑫旭大神Blog上引用的一张图 我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制 浏览器默认 &amp;lt; 继承 &amp;lt; 通配符 &amp;lt; 元素 &amp;lt; 类，属性选择器，伪类 &amp;lt; id &amp;lt; 行内 &amp;lt; !important :nth-child  :nth-of-type 区别 p:nth-child(2)表示这个元素要是p标签，且是第">
+<meta property="og:description" content="引用张鑫旭大神Blog上引用的一张图 我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制 浏览器默认 &amp;lt; 继承 &amp;lt; 通配符 &amp;lt; 元素 &amp;lt; 类，属性选择器，伪类 &amp;lt; id &amp;lt; 行内 &amp;lt; !important 123456789101112131415161718192021222324&amp;lt;!DOCTYPE html&amp;">
 <meta property="og:image" content="http://yoursite.com/2018/02/24/css选择器优先级/img/css_selector.png">
-<meta property="og:updated_time" content="2018-02-24T08:18:45.000Z">
+<meta property="og:updated_time" content="2018-04-08T07:41:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css选择器优先级">
-<meta name="twitter:description" content="引用张鑫旭大神Blog上引用的一张图 我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制 浏览器默认 &amp;lt; 继承 &amp;lt; 通配符 &amp;lt; 元素 &amp;lt; 类，属性选择器，伪类 &amp;lt; id &amp;lt; 行内 &amp;lt; !important :nth-child  :nth-of-type 区别 p:nth-child(2)表示这个元素要是p标签，且是第">
+<meta name="twitter:description" content="引用张鑫旭大神Blog上引用的一张图 我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制 浏览器默认 &amp;lt; 继承 &amp;lt; 通配符 &amp;lt; 元素 &amp;lt; 类，属性选择器，伪类 &amp;lt; id &amp;lt; 行内 &amp;lt; !important 123456789101112131415161718192021222324&amp;lt;!DOCTYPE html&amp;">
 <meta name="twitter:image" content="http://yoursite.com/2018/02/24/css选择器优先级/img/css_selector.png">
   
   
@@ -172,6 +172,7 @@
         <p>引用张鑫旭大神<a href="http://www.zhangxinxu.com/wordpress/2012/08/256-class-selector-beat-id-selector/" target="_blank" rel="external">Blog</a>上引用的一张图<br><img src="./img/css_selector.png" alt=""></p>
 <p>我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制</p>
 <p>浏览器默认 &lt; 继承 &lt; 通配符 &lt; 元素 &lt; 类，属性选择器，伪类 &lt; id &lt; 行内 &lt; !important</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">    .test .test3 &#123;</span></div><div class="line"><span class="undefined">      color: red;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    </span></div><div class="line"><span class="undefined">    .test3.test4 &#123;</span></div><div class="line"><span class="undefined">      color: blue;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    /*谁在后面谁优先级高*/</span></div><div class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"test test1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"test3 test4"</span>&gt;</span></div><div class="line">    我是什么颜色</div><div class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p><code>:nth-child</code>  <code>:nth-of-type</code> 区别</p>
 <p>p:nth-child(2)表示这个元素要是p标签，且是第二个子元素<br>p:nth-of-type(2)表示父标签下的第二个p元素</p>
 <p><code>:only-child</code>  <code>:only-of-type</code> 区别</p>
@@ -387,10 +388,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -399,11 +396,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vue js</a>
+                <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">正则</a>
+                <a href="javascript:void(0)" class="js-tag color2">vue js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -411,23 +408,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">正则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -443,7 +428,27 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js object</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">

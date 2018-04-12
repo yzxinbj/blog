@@ -145,6 +145,199 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JS运行机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/03/16/JS运行机制/">JS运行机制</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/03/16/JS运行机制/" class="archive-article-date">
+  	<time datetime="2018-03-16T02:17:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="浏览器进程"><a href="#浏览器进程" class="headerlink" title="浏览器进程"></a>浏览器进程</h3><ul>
+<li>进程？<br>系统独立分配的一块内存，是 cpu 资源分配的最小单位</li>
+<li><p>线程？<br>是 cpu 最小的调度单位，是在进程基础上的一次程序运行单位</p>
+</li>
+<li><p>浏览器都包含哪些进程？</p>
+</li>
+</ul>
+<ol>
+<li>Browser进程: Browser 主进程主控，协调每个 Tab 页，每个 tab 又是一个独立的进程</li>
+<li>浏览器渲染进程（Renderer进程，即每个 Tab 进程）</li>
+<li>GPU进程（最多一个，用于3D 绘制）</li>
+<li>第三方插件进程</li>
+</ol>
+<ul>
+<li><p>重点浏览器内核（渲染进程，Renderer进程，即每个 tab 页）<br>在浏览器中打开一个网页相当于新启一个进程，此进程又包含5个线程<br>（多个 tab 空白页可能会被优化为一个进程）</p>
+</li>
+<li><p>哪五个线程？</p>
+</li>
+</ul>
+<ol>
+<li>GUI 渲染线程：</li>
+<li>JS 引擎线程：</li>
+<li>事件触发线程：</li>
+<li>定时触发器线程：</li>
+<li>网络请求线程：可以理解为异步 http 请求线程</li>
+</ol>
+<p>GUI 线程与 JS线程互斥：为了防止两个线程同时改变视图，引发矛盾</p>
+<h3 id="浏览器内核运行"><a href="#浏览器内核运行" class="headerlink" title="浏览器内核运行"></a>浏览器内核运行</h3><ol>
+<li>输入一个 url 请求通过下载线程，获取返回结果，然后RendererHost交个 Renderer 进程</li>
+<li>Renderer 进程解析 html css ==&gt;&gt; render 树   交给GPU</li>
+<li>触发 DOMContentLoaded &amp;&amp; load 事件 (区别：通过事件定义可以区分，DOMContentLoaded是dom加载完成，而 load 是渲染完成)</li>
+</ol>
+<h3 id="JS引擎单线程"><a href="#JS引擎单线程" class="headerlink" title="JS引擎单线程"></a>JS引擎单线程</h3><ul>
+<li>webworker<br>js 向 浏览器申请的一个子线程，完全受js主线程控制，且不能操作 dom<br>且需要通过特定的序列化接口通信</li>
+</ul>
+<h3 id="JS事件循环机制"><a href="#JS事件循环机制" class="headerlink" title="JS事件循环机制"></a>JS事件循环机制</h3><p>事件，定时器都是通过回调，然后排队<br>而promise 可以理解为插队，是放到 microTask 队列中，在 macroTask 之前</p>
+<p>了解了浏览器模型<br>那就可以解释为什么 js会阻塞页面加载？<br>由于渲染页面的 GUI线程互斥与 JS线程，就会导致 GUI任务需要排队等待的情况</p>
+<h2 id="展开——浏览器访问一个地址（url）到底发生了什么？"><a href="#展开——浏览器访问一个地址（url）到底发生了什么？" class="headerlink" title="展开——浏览器访问一个地址（url）到底发生了什么？"></a>展开——浏览器访问一个地址（url）到底发生了什么？</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">JS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2018/03/16/JS运行机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-关于Promise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/03/10/关于Promise/">关于Promise</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/03/10/关于Promise/" class="archive-article-date">
+  	<time datetime="2018-03-10T03:47:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Promise规范"><a href="#Promise规范" class="headerlink" title="Promise规范"></a>Promise规范</h3><p>Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+</p>
+<p><a href="http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/" target="_blank" rel="external">石墨文档翻译的Promise/A+规范</a></p>
+<h3 id="Promise-本质是一个状态机"><a href="#Promise-本质是一个状态机" class="headerlink" title="Promise 本质是一个状态机"></a>Promise 本质是一个状态机</h3><h3 id="自己的理解"><a href="#自己的理解" class="headerlink" title="自己的理解"></a>自己的理解</h3><p>Promise 内部通过</p>
+<ol>
+<li>局部变量暂存：异步返回的结果、成功失败的回调函数（resolve, reject，类似观察者模式）</li>
+<li>Promise 接受一个回调函数，通过给此回调函数传入 resolve ,reject 函数来控制</li>
+</ol>
+<p>Promise 内通过异步执行resolve,reject回调,来保证 then 函数在其之前执行，并且在 then 函数中通过状态变量来控制，是否执行回调还是暂存回调（观察者）</p>
+<p>简版 promise 分析理解<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> state = <span class="string">'pending'</span>,      <span class="comment">// 状态控制</span></div><div class="line">        value = <span class="literal">null</span>,           <span class="comment">// 暂存返回值</span></div><div class="line">        callbacks = [];         <span class="comment">// 暂时存储回调</span></div><div class="line">    </div><div class="line">    <span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span> (<span class="params">onFulfilled</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (state === <span class="string">'pending'</span>) &#123;             <span class="comment">// 判断是否得到结果，是执行还是暂存</span></div><div class="line">            callbacks.push(onFulfilled);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line">        onFulfilled(value);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;               <span class="comment">// 异步执行</span></div><div class="line">            value = newValue;                  <span class="comment">// 暂存结果</span></div><div class="line">            state = <span class="string">'fulfilled'</span>;               <span class="comment">// 得到结果， 更改状态</span></div><div class="line">            </div><div class="line">            callbacks.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</div><div class="line">                callback(value);</div><div class="line">            &#125;);</div><div class="line">        &#125;, <span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    fn(resolve);                              <span class="comment">// 执行 Promise 传入的回调，最先执行，传入 resolve ，方便自定义何时执行返回结果</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> status = <span class="string">'pending'</span>,</div><div class="line">      callbacks = [],</div><div class="line">      value;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> resolve = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 存下返回的值&amp;改变状态</span></div><div class="line">    value = val;</div><div class="line">    status = <span class="string">'fulfilled'</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 2. 执行 callbacks 里的回调，如果没有调用了 then 则 callbacks 为空</span></div><div class="line">      <span class="comment">// 增加判断</span></div><div class="line">    callbacks.length &amp;&amp; callbacks.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</div><div class="line">        cb(value);</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> reject = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 改变状态</span></div><div class="line">    status = <span class="string">'rejected'</span>;</div><div class="line">    </div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">  <span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFulfilled, onRejected</span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 判断状态，如果 fullfilled  则表示返回了结果，则立即执行onFulfilled成功回调，否则，暂时存入 callbacks 里，等待返回结果后被resolve函数内调用</span></div><div class="line">    <span class="keyword">if</span>(status === <span class="string">'fulfilled'</span>)&#123;</div><div class="line">      <span class="comment">// 此处判断不严谨，暂时只做简单判断</span></div><div class="line">      onFulfilled &amp;&amp; onFulfilled(value);</div><div class="line">      <span class="keyword">return</span> ;</div><div class="line">    &#125; </div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(status === <span class="string">'rejected'</span>) &#123;</div><div class="line">      onRejected &amp;&amp; onRejected(value);</div><div class="line">      <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    callbacks.push(onFulfilled);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">// 去掉了类型判断</span></div><div class="line">  fn(resolve);</div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2018/03/10/关于Promise/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-前后端分离的一些理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -256,6 +449,7 @@
         <p>引用张鑫旭大神<a href="http://www.zhangxinxu.com/wordpress/2012/08/256-class-selector-beat-id-selector/" target="_blank" rel="external">Blog</a>上引用的一张图<br><img src="./img/css_selector.png" alt=""></p>
 <p>我的理解是把这些数字看成256进制，或者理解你的计算机是 n 位的，则理解为2^n 进制</p>
 <p>浏览器默认 &lt; 继承 &lt; 通配符 &lt; 元素 &lt; 类，属性选择器，伪类 &lt; id &lt; 行内 &lt; !important</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">    .test .test3 &#123;</span></div><div class="line"><span class="undefined">      color: red;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    </span></div><div class="line"><span class="undefined">    .test3.test4 &#123;</span></div><div class="line"><span class="undefined">      color: blue;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    /*谁在后面谁优先级高*/</span></div><div class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"test test1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"test3 test4"</span>&gt;</span></div><div class="line">    我是什么颜色</div><div class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p><code>:nth-child</code>  <code>:nth-of-type</code> 区别</p>
 <p>p:nth-child(2)表示这个元素要是p标签，且是第二个子元素<br>p:nth-of-type(2)表示父标签下的第二个p元素</p>
 <p><code>:only-child</code>  <code>:only-of-type</code> 区别</p>
@@ -828,186 +1022,9 @@
 
 
   
-    <article id="post-关于-configurable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/10/31/关于-configurable/">关于-configurable</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2017/10/31/关于-configurable/" class="archive-article-date">
-  	<time datetime="2017-10-31T05:58:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty()"></a>Object.defineProperty()</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'key'</span>, &#123;</div><div class="line">  enumerable: <span class="literal">false</span>, <span class="comment">// 是否可枚举，即能否在 for in 中遍历出来</span></div><div class="line">  configurable: <span class="literal">false</span>, <span class="comment">// 能否修改前3个属性</span></div><div class="line">  writable: <span class="literal">false</span>, <span class="comment">// 能否修改此值，如直接赋值，或用defineProperty更改</span></div><div class="line">  value: <span class="string">'static'</span> <span class="comment">// 值</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>例子如下<br>
-        
-          <a class="article-more-a" href="/blog/2017/10/31/关于-configurable/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2017/10/31/关于-configurable/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux-02-linux用户及文件权限管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/10/30/linux-02-linux用户及文件权限管理/">linux用户及文件权限管理</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2017/10/30/linux-02-linux用户及文件权限管理/" class="archive-article-date">
-  	<time datetime="2017-10-30T08:54:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><p><code>who am i</code>  <code>whoami</code> <code>who mom likes</code></p>
-<p><code>yanzixian pts/0        2017-11-01 09:45 (172.17.62.48)</code><br>第二列的 pts/0 中 pts 表示伪终端，所谓伪是相对于 /dev/tty 设备而言的，<br>[Ctrl]+[Alt]+[F1]～[F7] 进行切换的 /dev/tty 设备,这是“真终端”，<br>伪终端就是当你在图形用户界面使用 /dev/tty7 时每打开一个终端就会产生一个伪终端，<br>pts/0 后面那个数字就表示打开的伪终端序号，再打开一个终端，然后在里面输入 who am i ，<br>第二列就变成 pts/1 了，第三列则表示当前伪终端的启动时间</p>
-<p><code>who</code> 命令参数</p>
-        
-          <a class="article-more-a" href="/blog/2017/10/30/linux-02-linux用户及文件权限管理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2017/10/30/linux-02-linux用户及文件权限管理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1102,10 +1119,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -1114,11 +1127,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vue js</a>
+                <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">正则</a>
+                <a href="javascript:void(0)" class="js-tag color2">vue js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1126,23 +1139,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">正则</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1158,7 +1159,27 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js object</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
