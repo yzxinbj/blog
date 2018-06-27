@@ -1,5 +1,5 @@
 ---
-title: 关于-configurable
+title: 关于-defineProperty
 date: 2017-10-31 13:58:05
 tags: javascript
 categories: 编程
@@ -10,10 +10,13 @@ categories: 编程
 var obj = {};
 
 Object.defineProperty(obj, 'key', {
-  enumerable: false, // 是否可枚举，即能否在 for in 中遍历出来
-  configurable: false, // 能否修改前3个属性
+  // 是否可枚举，即能否在 for in 中遍历出来，以及 Object.keys(),JSON.stringify()
+  // 但注意！Object.keys JSON.stringify 只会处理对象本身的可枚举属性，
+  // 而 for in 会遍历 整个原型链上的可枚举属性
+  enumerable: false, 
   writable: false, // 能否修改此值，如直接赋值，或用defineProperty更改
-  value: 'static' // 值
+  value: 'static', // 值
+  configurable: false // 能否修改前3个属性
 });
 ```
 例子如下
