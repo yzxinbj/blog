@@ -145,6 +145,135 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-reduce-polyfill" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/06/12/reduce-polyfill/">reduce-polyfill</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/06/12/reduce-polyfill/" class="archive-article-date">
+  	<time datetime="2018-06-12T07:07:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">if (!Array.prototype.reduce) &#123;</div><div class="line">  Object.defineProperty(Array.prototype, &apos;reduce&apos;, &#123;</div><div class="line">    value: function(callback /*, initialValue*/) &#123;</div><div class="line">      if (this === null) &#123;</div><div class="line">        throw new TypeError( &apos;Array.prototype.reduce &apos; + </div><div class="line">          &apos;called on null or undefined&apos; );</div><div class="line">      &#125;</div><div class="line">      if (typeof callback !== &apos;function&apos;) &#123;</div><div class="line">        throw new TypeError( callback +</div><div class="line">          &apos; is not a function&apos;);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      var o = Object(this);</div><div class="line">        </div><div class="line">      // &gt;&gt;&gt; 无符号右移，作用非负数取整</div><div class="line">      var len = o.length &gt;&gt;&gt; 0; </div><div class="line"></div><div class="line">      var k = 0; </div><div class="line">      var value;</div><div class="line"></div><div class="line">      if (arguments.length &gt;= 2) &#123;</div><div class="line">        value = arguments[1];</div><div class="line">      &#125; else &#123;</div><div class="line">        /**</div><div class="line">         *  当没有给初始值时</div><div class="line">         *  下面这是为了解决 Array.prototype.reduce.call(&#123; 2:234, 4: 456,length:8&#125;, function()&#123;&#125;)</div><div class="line">         *  注意必须传 length</div><div class="line">         *  解决这种调用，可以直接从 2 开始</div><div class="line">         */</div><div class="line">        while (k &lt; len &amp;&amp; !(k in o)) &#123;</div><div class="line">          k++; </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (k &gt;= len) &#123;</div><div class="line">          throw new TypeError( &apos;Reduce of empty array &apos; +</div><div class="line">            &apos;with no initial value&apos; );</div><div class="line">        &#125;</div><div class="line">        value = o[k++];</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      while (k &lt; len) &#123;</div><div class="line">        // 此处同样是为了解决上面写的 call 调用的方式 </div><div class="line">        // 先判断 k 是否在 o 里</div><div class="line">        // 不加判断，比如求和的时候就会出现 undefined + 1 = NaN</div><div class="line">        if (k in o) &#123;</div><div class="line">          value = callback(value, o[k], k, o);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        k++;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      return value;</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2018/06/12/reduce-polyfill/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-原生api总结学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/05/23/原生api总结学习/">原生api总结学习</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/05/23/原生api总结学习/" class="archive-article-date">
+  	<time datetime="2018-05-23T13:31:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign"></a>Object.assign</h2><p>浅拷贝</p>
+<h2 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create"></a>Object.create</h2><p>function Constructor(){}<br>o = new Constructor();<br>// 上面的一句就相当于:<br>o = Object.create(Constructor.prototype);<br>// 当然,如果在Constructor函数中有一些初始化代码,Object.create不能执行那些代码</p>
+<h2 id="Object-hasOwnProperty"><a href="#Object-hasOwnProperty" class="headerlink" title="Object.hasOwnProperty"></a>Object.hasOwnProperty</h2><p>只会判断自身属性，原型和原型链上的会返回 false</p>
+<h2 id="undefined-非严格模式是可以被改写的"><a href="#undefined-非严格模式是可以被改写的" class="headerlink" title="undefined 非严格模式是可以被改写的"></a>undefined 非严格模式是可以被改写的</h2><p>void 运算符会对给定的表达式进行求值，然后返回 undefined </p>
+<h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2018/05/23/原生api总结学习/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue源码学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -445,7 +574,9 @@
       
         <h3 id="Promise规范"><a href="#Promise规范" class="headerlink" title="Promise规范"></a>Promise规范</h3><p>Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+</p>
 <p><a href="http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/" target="_blank" rel="external">石墨文档翻译的Promise/A+规范</a></p>
-<h3 id="Promise-本质是一个状态机"><a href="#Promise-本质是一个状态机" class="headerlink" title="Promise 本质是一个状态机"></a>Promise 本质是一个状态机</h3><h3 id="自己的理解"><a href="#自己的理解" class="headerlink" title="自己的理解"></a>自己的理解</h3><p>Promise 内部通过</p>
+<h3 id="Promise-本质是一个状态机"><a href="#Promise-本质是一个状态机" class="headerlink" title="Promise 本质是一个状态机"></a>Promise 本质是一个状态机</h3><p>then 实际上就是：如果已经 resolve ，如果当前 promise 实例 已经有了结果，则直接调用对应的成功或失败回调，如果没有结果，则把回调先绑定到当前实例上</p>
+<p>resolve 就是给 promise实例 绑定一个结果，并且如果已经调用 then 绑定了成功和失败的回调，则执行对应回调，否则不执行；</p>
+<h3 id="自己的理解"><a href="#自己的理解" class="headerlink" title="自己的理解"></a>自己的理解</h3><p>Promise 内部通过</p>
 <ol>
 <li>局部变量暂存：异步返回的结果、成功失败的回调函数（resolve, reject，类似观察者模式）</li>
 <li>Promise 接受一个回调函数，通过给此回调函数传入 resolve ,reject 函数来控制</li>
@@ -453,6 +584,17 @@
 <p>Promise 内通过异步执行resolve,reject回调,来保证 then 函数在其之前执行，并且在 then 函数中通过状态变量来控制，是否执行回调还是暂存回调（观察者）</p>
 <p>简版 promise 分析理解<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> state = <span class="string">'pending'</span>,      <span class="comment">// 状态控制</span></div><div class="line">        value = <span class="literal">null</span>,           <span class="comment">// 暂存返回值</span></div><div class="line">        callbacks = [];         <span class="comment">// 暂时存储回调</span></div><div class="line">    </div><div class="line">    <span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span> (<span class="params">onFulfilled</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (state === <span class="string">'pending'</span>) &#123;             <span class="comment">// 判断是否得到结果，是执行还是暂存</span></div><div class="line">            callbacks.push(onFulfilled);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line">        onFulfilled(value);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;               <span class="comment">// 异步执行</span></div><div class="line">            value = newValue;                  <span class="comment">// 暂存结果</span></div><div class="line">            state = <span class="string">'fulfilled'</span>;               <span class="comment">// 得到结果， 更改状态</span></div><div class="line">            </div><div class="line">            callbacks.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</div><div class="line">                callback(value);</div><div class="line">            &#125;);</div><div class="line">        &#125;, <span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    fn(resolve);                              <span class="comment">// 执行 Promise 传入的回调，最先执行，传入 resolve ，方便自定义何时执行返回结果</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> status = <span class="string">'pending'</span>,</div><div class="line">      callbacks = [],</div><div class="line">      value;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> resolve = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 存下返回的值&amp;改变状态</span></div><div class="line">    value = val;</div><div class="line">    status = <span class="string">'fulfilled'</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 2. 执行 callbacks 里的回调，如果没有调用了 then 则 callbacks 为空</span></div><div class="line">      <span class="comment">// 增加判断</span></div><div class="line">    callbacks.length &amp;&amp; callbacks.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</div><div class="line">        cb(value);</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> reject = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 改变状态</span></div><div class="line">    status = <span class="string">'rejected'</span>;</div><div class="line">    </div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">  <span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFulfilled, onRejected</span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 判断状态，如果 fullfilled  则表示返回了结果，则立即执行onFulfilled成功回调，否则，暂时存入 callbacks 里，等待返回结果后被resolve函数内调用</span></div><div class="line">    <span class="keyword">if</span>(status === <span class="string">'fulfilled'</span>)&#123;</div><div class="line">      <span class="comment">// 此处判断不严谨，暂时只做简单判断</span></div><div class="line">      onFulfilled &amp;&amp; onFulfilled(value);</div><div class="line">      <span class="keyword">return</span> ;</div><div class="line">    &#125; </div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(status === <span class="string">'rejected'</span>) &#123;</div><div class="line">      onRejected &amp;&amp; onRejected(value);</div><div class="line">      <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    callbacks.push(onFulfilled);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">// 去掉了类型判断</span></div><div class="line">  fn(resolve);</div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">const p1 = new Promise(function (resolve, reject) &#123;</div><div class="line">  // ...</div><div class="line">&#125;);</div><div class="line"></div><div class="line">const p2 = new Promise(function (resolve, reject) &#123;</div><div class="line">  // ...</div><div class="line">  resolve(p1);</div><div class="line">  // 相当于p1执行 then , 但接受的回调函数是 p2的， 知识点！！</div><div class="line">  p1.then(p2.resolvingFunctions[0],p2.resolvingFunctions[1]);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">new Promise((resolve, reject) =&gt; &#123;</div><div class="line">  resolve(1);</div><div class="line">  console.log(2);</div><div class="line">&#125;).then(r =&gt; &#123;</div><div class="line">  console.log(r);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>输出是？ 2, 1</p>
+<p>好的方法，添加 return<br><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">new Promise((resolve, reject) =&gt; &#123;</div><div class="line">  return resolve(1);</div><div class="line">  // 后面的语句不会执行</div><div class="line">  console.log(2);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<ol>
+<li></li>
+</ol>
 
       
 
@@ -843,187 +985,6 @@
 
 
   
-    <article id="post-js知识分享" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/01/04/js知识分享/">js相关知识分享</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2018/01/04/js知识分享/" class="archive-article-date">
-  	<time datetime="2018-01-04T06:39:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="关于变量"><a href="#关于变量" class="headerlink" title="关于变量"></a>关于变量</h3><ul>
-<li>基础数据类型：<code>Undefined、Null、Boolean、Number、String、Symbol</code></li>
-<li>引用数据类型：<code>Array、Object</code></li>
-<li>为什么浅复制，深复制怎么实现</li>
-</ul>
-<h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><blockquote>
-<p>思考：如果有重名变量，函数时如何确定当前程序是取得哪个变量？<br>
-        
-          <a class="article-more-a" href="/blog/2018/01/04/js知识分享/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2018/01/04/js知识分享/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-win32-01-win32" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/11/21/win32-01-win32/">win32学习</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2017/11/21/win32-01-win32/" class="archive-article-date">
-  	<time datetime="2017-11-21T09:31:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="入口函数"><a href="#入口函数" class="headerlink" title="入口函数"></a>入口函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int WINAPI WinMain</div><div class="line">(  </div><div class="line">      HINSTANCE hInstance,      // handle to current instance</div><div class="line">      HINSTANCE hPrevInstance,  // handle to previous instance</div><div class="line">      LPSTR lpCmdLine,          // command line</div><div class="line">      int nCmdShow              // show state</div><div class="line">);</div></pre></td></tr></table></figure>
-<h3 id="窗口程序的编程步骤"><a href="#窗口程序的编程步骤" class="headerlink" title="窗口程序的编程步骤"></a>窗口程序的编程步骤</h3>
-        
-          <a class="article-more-a" href="/blog/2017/11/21/win32-01-win32/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">win32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/blog/categories/programming//" class="article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2017/11/21/win32-01-win32/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
@@ -1121,15 +1082,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随想</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1141,7 +1106,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1157,15 +1130,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1173,15 +1138,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vue js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">

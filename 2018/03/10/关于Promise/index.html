@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>关于Promise | the_road_to_rdinary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Promise规范Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+ 石墨文档翻译的Promise/A+规范 Promise 本质是一个状态机自己的理解Promise 内部通过  局部变量暂存：异步返回的结果、成功失败的回调函数（resolve, reject，类似观察者模式） Promise 接受">
+  <meta name="description" content="Promise规范Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+ 石墨文档翻译的Promise/A+规范 Promise 本质是一个状态机then 实际上就是：如果已经 resolve ，如果当前 promise 实例 已经有了结果，则直接调用对应的成功或失败回调，如果没有结果，则把回调先绑定到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于Promise">
 <meta property="og:url" content="http://yoursite.com/2018/03/10/关于Promise/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
-<meta property="og:description" content="Promise规范Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+ 石墨文档翻译的Promise/A+规范 Promise 本质是一个状态机自己的理解Promise 内部通过  局部变量暂存：异步返回的结果、成功失败的回调函数（resolve, reject，类似观察者模式） Promise 接受">
-<meta property="og:updated_time" content="2018-04-11T06:35:47.000Z">
+<meta property="og:description" content="Promise规范Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+ 石墨文档翻译的Promise/A+规范 Promise 本质是一个状态机then 实际上就是：如果已经 resolve ，如果当前 promise 实例 已经有了结果，则直接调用对应的成功或失败回调，如果没有结果，则把回调先绑定到">
+<meta property="og:updated_time" content="2018-06-12T10:56:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于Promise">
-<meta name="twitter:description" content="Promise规范Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+ 石墨文档翻译的Promise/A+规范 Promise 本质是一个状态机自己的理解Promise 内部通过  局部变量暂存：异步返回的结果、成功失败的回调函数（resolve, reject，类似观察者模式） Promise 接受">
+<meta name="twitter:description" content="Promise规范Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+ 石墨文档翻译的Promise/A+规范 Promise 本质是一个状态机then 实际上就是：如果已经 resolve ，如果当前 promise 实例 已经有了结果，则直接调用对应的成功或失败回调，如果没有结果，则把回调先绑定到">
   
   
     <link rel="icon" href="/favicon.png">
@@ -169,7 +169,9 @@
       
         <h3 id="Promise规范"><a href="#Promise规范" class="headerlink" title="Promise规范"></a>Promise规范</h3><p>Promise 的规范有很多种： Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版 Promise/A+</p>
 <p><a href="http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/" target="_blank" rel="external">石墨文档翻译的Promise/A+规范</a></p>
-<h3 id="Promise-本质是一个状态机"><a href="#Promise-本质是一个状态机" class="headerlink" title="Promise 本质是一个状态机"></a>Promise 本质是一个状态机</h3><h3 id="自己的理解"><a href="#自己的理解" class="headerlink" title="自己的理解"></a>自己的理解</h3><p>Promise 内部通过</p>
+<h3 id="Promise-本质是一个状态机"><a href="#Promise-本质是一个状态机" class="headerlink" title="Promise 本质是一个状态机"></a>Promise 本质是一个状态机</h3><p>then 实际上就是：如果已经 resolve ，如果当前 promise 实例 已经有了结果，则直接调用对应的成功或失败回调，如果没有结果，则把回调先绑定到当前实例上</p>
+<p>resolve 就是给 promise实例 绑定一个结果，并且如果已经调用 then 绑定了成功和失败的回调，则执行对应回调，否则不执行；</p>
+<h3 id="自己的理解"><a href="#自己的理解" class="headerlink" title="自己的理解"></a>自己的理解</h3><p>Promise 内部通过</p>
 <ol>
 <li>局部变量暂存：异步返回的结果、成功失败的回调函数（resolve, reject，类似观察者模式）</li>
 <li>Promise 接受一个回调函数，通过给此回调函数传入 resolve ,reject 函数来控制</li>
@@ -177,6 +179,17 @@
 <p>Promise 内通过异步执行resolve,reject回调,来保证 then 函数在其之前执行，并且在 then 函数中通过状态变量来控制，是否执行回调还是暂存回调（观察者）</p>
 <p>简版 promise 分析理解<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> state = <span class="string">'pending'</span>,      <span class="comment">// 状态控制</span></div><div class="line">        value = <span class="literal">null</span>,           <span class="comment">// 暂存返回值</span></div><div class="line">        callbacks = [];         <span class="comment">// 暂时存储回调</span></div><div class="line">    </div><div class="line">    <span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span> (<span class="params">onFulfilled</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (state === <span class="string">'pending'</span>) &#123;             <span class="comment">// 判断是否得到结果，是执行还是暂存</span></div><div class="line">            callbacks.push(onFulfilled);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">        &#125;</div><div class="line">        onFulfilled(value);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;               <span class="comment">// 异步执行</span></div><div class="line">            value = newValue;                  <span class="comment">// 暂存结果</span></div><div class="line">            state = <span class="string">'fulfilled'</span>;               <span class="comment">// 得到结果， 更改状态</span></div><div class="line">            </div><div class="line">            callbacks.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</div><div class="line">                callback(value);</div><div class="line">            &#125;);</div><div class="line">        &#125;, <span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    fn(resolve);                              <span class="comment">// 执行 Promise 传入的回调，最先执行，传入 resolve ，方便自定义何时执行返回结果</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> status = <span class="string">'pending'</span>,</div><div class="line">      callbacks = [],</div><div class="line">      value;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> resolve = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 存下返回的值&amp;改变状态</span></div><div class="line">    value = val;</div><div class="line">    status = <span class="string">'fulfilled'</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 2. 执行 callbacks 里的回调，如果没有调用了 then 则 callbacks 为空</span></div><div class="line">      <span class="comment">// 增加判断</span></div><div class="line">    callbacks.length &amp;&amp; callbacks.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</div><div class="line">        cb(value);</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> reject = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 改变状态</span></div><div class="line">    status = <span class="string">'rejected'</span>;</div><div class="line">    </div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">  <span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFulfilled, onRejected</span>)</span>&#123;</div><div class="line">    <span class="comment">// 1. 判断状态，如果 fullfilled  则表示返回了结果，则立即执行onFulfilled成功回调，否则，暂时存入 callbacks 里，等待返回结果后被resolve函数内调用</span></div><div class="line">    <span class="keyword">if</span>(status === <span class="string">'fulfilled'</span>)&#123;</div><div class="line">      <span class="comment">// 此处判断不严谨，暂时只做简单判断</span></div><div class="line">      onFulfilled &amp;&amp; onFulfilled(value);</div><div class="line">      <span class="keyword">return</span> ;</div><div class="line">    &#125; </div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(status === <span class="string">'rejected'</span>) &#123;</div><div class="line">      onRejected &amp;&amp; onRejected(value);</div><div class="line">      <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    callbacks.push(onFulfilled);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">// 去掉了类型判断</span></div><div class="line">  fn(resolve);</div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ol>
+<li><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">const p1 = new Promise(function (resolve, reject) &#123;</div><div class="line">  // ...</div><div class="line">&#125;);</div><div class="line"></div><div class="line">const p2 = new Promise(function (resolve, reject) &#123;</div><div class="line">  // ...</div><div class="line">  resolve(p1);</div><div class="line">  // 相当于p1执行 then , 但接受的回调函数是 p2的， 知识点！！</div><div class="line">  p1.then(p2.resolvingFunctions[0],p2.resolvingFunctions[1]);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">new Promise((resolve, reject) =&gt; &#123;</div><div class="line">  resolve(1);</div><div class="line">  console.log(2);</div><div class="line">&#125;).then(r =&gt; &#123;</div><div class="line">  console.log(r);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>输出是？ 2, 1</p>
+<p>好的方法，添加 return<br><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">new Promise((resolve, reject) =&gt; &#123;</div><div class="line">  return resolve(1);</div><div class="line">  // 后面的语句不会执行</div><div class="line">  console.log(2);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<ol>
+<li></li>
+</ol>
 
       
 
@@ -386,15 +399,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随想</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -406,7 +423,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -422,15 +447,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -438,15 +455,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vue js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">

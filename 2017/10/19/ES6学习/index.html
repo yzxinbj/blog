@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/19/ES6学习/index.html">
 <meta property="og:site_name" content="the_road_to_rdinary">
 <meta property="og:description" content="关于执行顺序setTimeout, setInterval, setImmediate, process.nextTick 目前根据我了解的是由于 js 是单线程，所以通过事件循环 Event loop 实现代码的异步执行。其可理解为是在代码执行时，有一个任务队列，在执行完所有同步代码后，再按序执行队列的代码。 然后再分析执行顺序，定时器都是插入到队尾，nextTick 可理解为插入到队头(实际上">
-<meta property="og:updated_time" content="2017-10-31T06:50:36.000Z">
+<meta property="og:updated_time" content="2018-06-12T07:06:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6学习">
 <meta name="twitter:description" content="关于执行顺序setTimeout, setInterval, setImmediate, process.nextTick 目前根据我了解的是由于 js 是单线程，所以通过事件循环 Event loop 实现代码的异步执行。其可理解为是在代码执行时，有一个任务队列，在执行完所有同步代码后，再按序执行队列的代码。 然后再分析执行顺序，定时器都是插入到队尾，nextTick 可理解为插入到队头(实际上">
@@ -174,7 +174,23 @@
 <p>需要注意的是，下面两个的执行顺序是不定的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</div><div class="line">&#125;, <span class="number">0</span>);</div><div class="line"></div><div class="line">setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'setImmediate'</span>);</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 我执行了10次，测的结果是6次 timeout 先于 immediate</span></div></pre></td></tr></table></figure></p>
 <p>据此就可以代码测试了</p>
 <h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><p>Class 内的 所有函数都相当于写在 prototype 对象中</p>
-
+<p>但 static 关键字声明的是写在函数本身上<br><code>static</code> 是定义在类上的方法或属性，称为静态方法(属性)，实例访问不到</p>
+<p>get<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/get" target="_blank" rel="external"></a><br>定义一个 getter</p>
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><ul>
+<li>Symbol 是值类型，所以不需要使用 new</li>
+<li>类似字符串，所以会在某些情况产生矛盾，如下</li>
+</ul>
+<figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">let obj = &#123;&#125;;</div><div class="line">let mySymbol = Symbol();</div><div class="line">let mySymbol1 = Symbol(&apos;1&apos;);   // 传值只是为了调试打印出来时作区分</div><div class="line"></div><div class="line">// 给 obj 添加属性 name 可以使用 . 运算符如下</div><div class="line">obj.name = &apos;yzx&apos;;</div><div class="line"></div><div class="line">// 而给 obj 添加属性 mySymbol</div><div class="line">obj.mySymbol = &apos;mySymbol&apos;;</div><div class="line"></div><div class="line">// 知识点！！！</div><div class="line">// 但若使用 Symbol 类型的 mySymbol 则需要如下写法</div><div class="line">obj[mySymbol] = &apos;mySymbol&apos;;</div><div class="line">// 或者如下两种方式</div><div class="line">obj = &#123;</div><div class="line">   [mySymbol]: function()&#123;&#125;,</div><div class="line">   [mySymbol1](arg)&#123;/*...*/&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Object.defineProperty(obj, mySymbol, &#123;</div><div class="line">    value: &apos;mySymbol&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="Symbol-for"><a href="#Symbol-for" class="headerlink" title="Symbol.for"></a>Symbol.for</h4><ul>
+<li>与 Symbol() 一样会返回一个 Symbol 类型的值</li>
+<li>与直接调用 Symbol() 的区别是 Symbol.for() 会维护一个全局 symbol 注册表<figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Symbol(&apos;s&apos;) === Symbol(&apos;s&apos;)  // false</div><div class="line">Symbol.for(&apos;s&apos;) === Symbol.for(&apos;s&apos;)  // true</div><div class="line"></div><div class="line">let a = Symbol(&apos;a&apos;);</div><div class="line">let b = Symbol(&apos;a&apos;);</div><div class="line">let c = Symbol.for(&apos;a&apos;);</div><div class="line">let d = Symbol.for(&apos;a&apos;);</div><div class="line"></div><div class="line">a === b // false</div><div class="line"></div><div class="line">// 知识点！！！</div><div class="line">a === c // false</div><div class="line">c === d // true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Symbol-toStringTag"><a href="#Symbol-toStringTag" class="headerlink" title="Symbol.toStringTag"></a>Symbol.toStringTag</h4><p>自定义的类如果定义了 Symbol.toStringTag 属性 ，注意是属性，不是方法，因为 get 关键字<br>则 Object.prototype.toString.call() 会调用此属性的 getter<br><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class ValidatorClass&#123;</div><div class="line">    get [Symbol.toStringTag]()&#123;</div><div class="line">        return &apos;Validator&apos;;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Promise&#123;</div><div class="line">    get [Symbol.toStringTag]()&#123;</div><div class="line">        return &apos;Promise&apos;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Symbol-species"><a href="#Symbol-species" class="headerlink" title="Symbol.species"></a>Symbol.species</h4><p>知名的 Symbol.species 是个函数值属性，其被构造函数用以创建派生对象— MDN</p>
+<p>简单的讲子类使用继承的方法时，返回的是基类的实例，而不是子类的实例。<br><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Array1 extends Array &#123;</div><div class="line">  static get [Symbol.species]() &#123; return Array; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const a = new Array1(1, 2, 3);</div><div class="line">const mapped = a.map(x =&gt; x * x);</div><div class="line"></div><div class="line">console.log(mapped instanceof Array1);</div><div class="line">// expected output: false</div><div class="line"></div><div class="line">console.log(mapped instanceof Array);</div><div class="line">// expected output: true</div></pre></td></tr></table></figure></p>
+<p>一般常用写法<br><figure class="highlight plain"><figcaption><span>6</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(Promise, Symbol.species, &#123;</div><div class="line">	get: function () &#123; return this &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="reduce-实现"><a href="#reduce-实现" class="headerlink" title="reduce 实现"></a>reduce 实现</h2>
       
 
       
@@ -405,15 +421,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随想</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">c 语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -425,7 +445,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -441,15 +469,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,15 +477,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">高德地图</a>
+                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vue js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">JS</a>
               </li>
              
               <li class="article-tag-list-item">
